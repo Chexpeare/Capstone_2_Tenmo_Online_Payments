@@ -16,6 +16,7 @@ public class JwtAccessDeniedHandler implements AccessDeniedHandler {
         // This is invoked when user tries to access a secured REST resource without the necessary authorization
         // We should just send a 403 Forbidden response because there is no 'error' page to redirect to
         // Here you can place any message you want
+        System.out.println("Security Alert: 403 Forbidden. You do not have authorization to access this option.");
         response.sendError(HttpServletResponse.SC_FORBIDDEN, accessDeniedException.getMessage());
     }
 }
