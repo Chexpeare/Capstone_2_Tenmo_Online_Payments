@@ -2,9 +2,11 @@ package com.techelevator.tenmo;
 
 import com.techelevator.tenmo.model.AuthenticatedUser;
 import com.techelevator.tenmo.model.Balance;
+import com.techelevator.tenmo.model.Transfer;
 import com.techelevator.tenmo.model.UserCredentials;
 import com.techelevator.tenmo.services.AuthenticationService;
 import com.techelevator.tenmo.services.AuthenticationServiceException;
+import com.techelevator.tenmo.services.TenmoService;
 import com.techelevator.view.ConsoleService;
 
 import java.math.BigDecimal;
@@ -72,7 +74,7 @@ public class App {
 	}
 
 	private void viewCurrentBalance() {
-		// TODO !! COMPLETED !! : viewCurrentBalance()
+		// TODO !!==IMPLEMENTATION_IN_PROGRESS==!! : viewCurrentBalance()
 		BigDecimal balance = Balance.getBalance(currentUser.getToken());
 
 		System.out.println("viewCurrentBalance(): $" + balance + " TE Bucks");
@@ -80,11 +82,56 @@ public class App {
 	}
 
 	private void viewTransferHistory() {
-		// TODO Auto-generated method stub
-		System.out.println("viewTransferHistory(): not yet implemented.");
+		// TODO !!==IMPLEMENTATION_IN_PROGRESS==!! : viewTransferHistory()
+		System.out.println("viewTransferHistory(): IMPLEMENTATION_IN_PROGRESS");
 
+		try {
+			boolean valid = false;
+			while (!valid) {
+				int selectUser = Integer.parseInt(console.getUserInput("\t(1) - View all transfers for your account (Long Format)" +
+						"\n\t(2) - View all transfers for your account (Short Format)" +
+						"\n\t(3) - View the details of one transfer (Requires a Transfer ID)" + "\n\nPlease choose an option >>> "));
+				TenmoService tenmoService = null;
+				if (selectUser == 1) {
+					Transfer[] transfers = tenmoService.listAllTransfers(currentUser.getToken(), currentUser.getUser().getId());
+					for (Transfer i : transfers) {
+						System.out.println("------------------------------------------");
+						System.out.println(" Transfer Id: " + i.getTransferId() + "\t\t  Amount: $" + i.getAmount());
+						System.out.println("\t\tSender Acct.:\t    " + i.getAccountFrom());
+						System.out.println("\t\tRecipient Acct.:    " + i.getAccountTo());
+						System.out.println("------------------------------------------");
+					}
+					console.getUserInput("Press enter key to continue");
+					valid = true;
+				} else if (selectUser == 2) {
+					Transfer[] transfers = tenmoService.listAllTransfers(currentUser.getToken(),
+							currentUser.getUser().getId());
+					for (Transfer i : transfers) {
+						System.out.println(" Id: " + i.getTransferId() + " * To: "
+								+ i.getAccountTo() + " * From: " + i.getAccountFrom() +
+								" * Amount: $" + i.getAmount());
+					}
+					console.getUserInput("Press enter key to continue");
+					valid = true;
+				} else if (selectUser == 3) {
+
+					int transferId = Integer.parseInt(console.getUserInput("Enter the transfer ID: "));
+					Transfer transfer = tenmoService.singleTransfer(currentUser.getToken(), transferId);
+					System.out.println("------------------------------------------");
+					System.out.println(" Transfer Id: " + transfer.getTransferId() + "\t\t  Amount: $" + transfer.getAmount());
+					System.out.println("\t\tSender Acct.:\t    " + transfer.getAccountFrom());
+					System.out.println("\t\tRecipient Acct.:    " + transfer.getAccountTo());
+					System.out.println("------------------------------------------");
+					console.getUserInput("Press enter key to continue");
+					valid = true;
+				} else {
+					System.out.println("Invalid Selection!");
+				}
+			}
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
 	}
-
 	private void viewPendingRequests() {
 		// TODO Auto-generated method stub
 		System.out.println("viewPendingRequests(): not yet implemented.");
