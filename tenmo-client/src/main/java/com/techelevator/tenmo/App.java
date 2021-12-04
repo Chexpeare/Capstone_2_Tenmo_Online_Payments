@@ -1,13 +1,13 @@
 package com.techelevator.tenmo;
 
+import com.techelevator.view.ConsoleService;
 import com.techelevator.tenmo.model.AuthenticatedUser;
-import com.techelevator.tenmo.model.Balance;
 import com.techelevator.tenmo.model.Transfer;
 import com.techelevator.tenmo.model.UserCredentials;
+import com.techelevator.tenmo.services.AccountService;
 import com.techelevator.tenmo.services.AuthenticationService;
 import com.techelevator.tenmo.services.AuthenticationServiceException;
-import com.techelevator.tenmo.services.TenmoService;
-import com.techelevator.view.ConsoleService;
+import com.techelevator.tenmo.services.TransferService;
 
 import java.math.BigDecimal;
 
@@ -26,13 +26,14 @@ public class App {
 	private static final String MAIN_MENU_OPTION_VIEW_PENDING_REQUESTS = "View your pending requests";
 	private static final String MAIN_MENU_OPTION_LOGIN = "Login as different user";
 	private static final String[] MAIN_MENU_OPTIONS = { MAIN_MENU_OPTION_VIEW_BALANCE, MAIN_MENU_OPTION_SEND_BUCKS, MAIN_MENU_OPTION_VIEW_PAST_TRANSFERS, MAIN_MENU_OPTION_REQUEST_BUCKS, MAIN_MENU_OPTION_VIEW_PENDING_REQUESTS, MAIN_MENU_OPTION_LOGIN, MENU_OPTION_EXIT };
-	private static final String TRANSFER_AMOUNT = "Enter the amount you would like to transfer";
+//	private static final String TRANSFER_AMOUNT = "Enter the amount you would like to transfer";
 
 	private AuthenticatedUser currentUser;
-    private ConsoleService console;
-    private AuthenticationService authenticationService;
+	private final ConsoleService console;
+	private final AuthenticationService authenticationService;
+//	private AccountService accountService;
 
-    public static void main(String[] args) {
+	public static void main(String[] args) {
     	App app = new App(new ConsoleService(System.in, System.out), new AuthenticationService(API_BASE_URL));
     	app.run();
     }
@@ -52,102 +53,128 @@ public class App {
 	}
 
 	private void mainMenu() {
-		while(true) {
-			String choice = (String)console.getChoiceFromOptions(MAIN_MENU_OPTIONS);
-			if(MAIN_MENU_OPTION_VIEW_BALANCE.equals(choice)) {
-				viewCurrentBalance();
-			} else if(MAIN_MENU_OPTION_VIEW_PAST_TRANSFERS.equals(choice)) {
-				viewTransferHistory();
-			} else if(MAIN_MENU_OPTION_VIEW_PENDING_REQUESTS.equals(choice)) {
-				viewPendingRequests();
-			} else if(MAIN_MENU_OPTION_SEND_BUCKS.equals(choice)) {
-				sendBucks();
-			} else if(MAIN_MENU_OPTION_REQUEST_BUCKS.equals(choice)) {
-				requestBucks();
-			} else if(MAIN_MENU_OPTION_LOGIN.equals(choice)) {
-				login();
-			} else {
-				// the only other option on the main menu is to exit
-				exitProgram();
+		try {
+			while(true) {
+
+				String choice = (String) console.getChoiceFromOptions(MAIN_MENU_OPTIONS);
+				if (MAIN_MENU_OPTION_VIEW_BALANCE.equals(choice)) {
+					viewCurrentBalance();
+				} else if (MAIN_MENU_OPTION_VIEW_PAST_TRANSFERS.equals(choice)) {
+					viewTransferHistory();
+				} else if (MAIN_MENU_OPTION_VIEW_PENDING_REQUESTS.equals(choice)) {
+					viewPendingRequests();
+				} else if (MAIN_MENU_OPTION_SEND_BUCKS.equals(choice)) {
+					sendBucks();
+				} else if (MAIN_MENU_OPTION_REQUEST_BUCKS.equals(choice)) {
+					requestBucks();
+				} else if (MAIN_MENU_OPTION_LOGIN.equals(choice)) {
+					login();
+				} else {
+					// the only other option on the main menu is to exit
+					exitProgram();
+				}
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
 	private void viewCurrentBalance() {
 		// TODO !!==IMPLEMENTATION_IN_PROGRESS==!! : viewCurrentBalance()
-		BigDecimal balance = Balance.getBalance(currentUser.getToken());
+		AccountService accountService = new AccountService(API_BASE_URL, currentUser);
 
-		System.out.println("viewCurrentBalance(): $" + balance + " TE Bucks");
-		
-	}
+//		BigDecimal balance = Account.getBalance();
+//		System.out.println("Your current account balance is: $" + balance);
+
+		try {
+			System.out.println("Your current account balance is: $" + accountService.getAccountBalance());
+		} catch (NullPointerException e) {
+			System.out.println("Account empty.");
+		}
+}
 
 	private void viewTransferHistory() {
 		// TODO !!==IMPLEMENTATION_IN_PROGRESS==!! : viewTransferHistory()
 		System.out.println("viewTransferHistory(): IMPLEMENTATION_IN_PROGRESS");
+		TransferService transferService = new TransferService(API_BASE_URL, currentUser);
 
 		try {
-			boolean valid = false;
-			while (!valid) {
-				int selectUser = Integer.parseInt(console.getUserInput("\t(1) - View all transfers for your account (Long Format)" +
-						"\n\t(2) - View all transfers for your account (Short Format)" +
-						"\n\t(3) - View the details of one transfer (Requires a Transfer ID)" + "\n\nPlease choose an option >>> "));
-				TenmoService tenmoService = null;
-				if (selectUser == 1) {
-					Transfer[] transfers = tenmoService.listAllTransfers(currentUser.getToken(), currentUser.getUser().getId());
-					for (Transfer i : transfers) {
-						System.out.println("------------------------------------------");
-						System.out.println(" Transfer Id: " + i.getTransferId() + "\t\t  Amount: $" + i.getAmount());
-						System.out.println("\t\tSender Acct.:\t    " + i.getAccountFrom());
-						System.out.println("\t\tRecipient Acct.:    " + i.getAccountTo());
-						System.out.println("------------------------------------------");
-					}
-					console.getUserInput("Press enter key to continue");
-					valid = true;
-				} else if (selectUser == 2) {
-					Transfer[] transfers = tenmoService.listAllTransfers(currentUser.getToken(),
-							currentUser.getUser().getId());
-					for (Transfer i : transfers) {
-						System.out.println(" Id: " + i.getTransferId() + " * To: "
-								+ i.getAccountTo() + " * From: " + i.getAccountFrom() +
-								" * Amount: $" + i.getAmount());
-					}
-					console.getUserInput("Press enter key to continue");
-					valid = true;
-				} else if (selectUser == 3) {
+			transferService.getAllTransfers();
+		} catch (NullPointerException e) {
+			System.out.println("No transfers found");
+		}
 
-					int transferId = Integer.parseInt(console.getUserInput("Enter the transfer ID: "));
-					Transfer transfer = tenmoService.singleTransfer(currentUser.getToken(), transferId);
-					System.out.println("------------------------------------------");
-					System.out.println(" Transfer Id: " + transfer.getTransferId() + "\t\t  Amount: $" + transfer.getAmount());
-					System.out.println("\t\tSender Acct.:\t    " + transfer.getAccountFrom());
-					System.out.println("\t\tRecipient Acct.:    " + transfer.getAccountTo());
-					System.out.println("------------------------------------------");
-					console.getUserInput("Press enter key to continue");
-					valid = true;
-				} else {
-					System.out.println("Invalid Selection!");
-				}
+		Integer enteredTransferID = console.getUserInputInteger("Please enter transfer ID to view details (0 to cancel): ");
+
+		try {
+			if (enteredTransferID == 0) {
+				mainMenu();
 			}
+			transferService.getSingleTransfer(enteredTransferID);
+		} catch (NullPointerException e) {
+			System.out.println("Transfer ID Invalid.");
 		} catch (NumberFormatException e) {
-			e.printStackTrace();
+			System.out.println("Transfer ID Invalid");
 		}
 	}
+
 	private void viewPendingRequests() {
 		// TODO Auto-generated method stub
 		System.out.println("viewPendingRequests(): not yet implemented.");
-
 	}
 
 	private void sendBucks() {
-		// TODO Auto-generated method stub
+		// TODO !!==IMPLEMENTATION_IN_PROGRESS==!! : sendBucks()
 		System.out.println("sendBucks(): not yet implemented.");
+//		TenmoService tenmoService = null;
+//		assert false;
+		TransferService transferService = new TransferService(API_BASE_URL, currentUser);
+		AccountService accountService = new AccountService(API_BASE_URL, currentUser);
 
+		try {
+			accountService.findAllUsers();
+		} catch (NullPointerException e) {
+			System.out.println("Account empty.");
+		}
+		Transfer newTransfer = new Transfer();
+		Transfer newTransferCheck = new Transfer();
+
+		Integer enteredUserID = console.getUserInputInteger("Enter ID of user you are sending to (0 to cancel): ");
+		if (enteredUserID == 0) {
+			mainMenu();
+		}
+		BigDecimal enteredAmount = console.getUserInputBigD("Enter amount: ");
+
+		try {
+
+			newTransfer = transferService.createTransfer(currentUser.getUser().getId(), enteredUserID, enteredAmount);
+
+			newTransferCheck = transferService.getSingleTransfer(newTransfer.getTransferId());
+
+			if (!newTransferCheck.equals(null)) {
+				System.out.println("Transfer successfully processed");
+			}
+
+			if (newTransferCheck.equals(null)) {
+				System.out.println("Transfer failed.");
+			}
+
+		} catch (NullPointerException f){
+
+			if(enteredAmount.compareTo(accountService.getAccountBalance()) == 1) {
+				System.out.println("Not enough balance.");
+			}
+
+		} catch (Exception e){
+
+			System.out.println();
+
+		}
 	}
 
 	private void requestBucks() {
 		// TODO Auto-generated method stub
 		System.out.println("requestBucks(): not yet implemented.");
-
 	}
 	
 	private void exitProgram() {
@@ -175,19 +202,18 @@ public class App {
 	private void register() {
 		System.out.println("Please register a new user account");
 		boolean isRegistered = false;
-        while (!isRegistered) //will keep looping until user is registered
-        {
-            UserCredentials credentials = collectUserCredentials();
-            try {
-            	authenticationService.register(credentials);
-            	isRegistered = true;
-				Balance.setBalance(BigDecimal.valueOf(1000));
-            	System.out.println("Registration successful. You can now login.");
-            } catch(AuthenticationServiceException e) {
-            	System.out.println("REGISTRATION ERROR: "+e.getMessage());
+		while (!isRegistered) //will keep looping until user is registered
+		{
+			UserCredentials credentials = collectUserCredentials();
+			try {
+				authenticationService.register(credentials);
+				isRegistered = true;
+				System.out.println("Registration successful. You can now login.");
+			} catch (AuthenticationServiceException e) {
+				System.out.println("REGISTRATION ERROR: "+ e.getMessage());
 				System.out.println("Please attempt to register again.");
-            }
-        }
+			}
+		}
 	}
 
 	private void login() {
@@ -199,7 +225,7 @@ public class App {
 		    try {
 				currentUser = authenticationService.login(credentials);
 			} catch (AuthenticationServiceException e) {
-				System.out.println("LOGIN ERROR: "+e.getMessage());
+				System.out.println("LOGIN ERROR: " + e.getMessage());
 				System.out.println("Please attempt to login again.");
 			}
 		}

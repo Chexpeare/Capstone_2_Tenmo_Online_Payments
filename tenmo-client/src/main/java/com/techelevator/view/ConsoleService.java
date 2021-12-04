@@ -4,12 +4,13 @@ package com.techelevator.view;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class ConsoleService {
 
-	private PrintWriter out;
-	private Scanner in;
+	private final PrintWriter out;
+	private final Scanner in;
 
 	public ConsoleService(InputStream input, OutputStream output) {
 		this.out = new PrintWriter(output, true);
@@ -54,7 +55,7 @@ public class ConsoleService {
 	}
 
 	public String getUserInput(String prompt) {
-		out.print(prompt+": ");
+		out.print(prompt + ": ");
 		out.flush();
 		return in.nextLine();
 	}
@@ -62,7 +63,7 @@ public class ConsoleService {
 	public Integer getUserInputInteger(String prompt) {
 		Integer result = null;
 		do {
-			out.print(prompt+": ");
+			out.print(prompt + ": ");
 			out.flush();
 			String userInput = in.nextLine();
 			try {
@@ -73,4 +74,24 @@ public class ConsoleService {
 		} while(result == null);
 		return result;
 	}
+
+	public BigDecimal getUserInputBigD(String prompt) {
+		BigDecimal result = null;
+		do {
+			out.print(prompt + ": ");
+			out.flush();
+			String userInput = in.nextLine();
+
+			try {
+				result = BigDecimal.valueOf(Double.parseDouble(userInput));
+			} catch (NumberFormatException e) {
+				out.println(System.lineSeparator() + "*** " + userInput + " is not valid ***" + System.lineSeparator());
+			}
+		}while(result == null);
+
+		return result;
+	}
+
+
+
 }

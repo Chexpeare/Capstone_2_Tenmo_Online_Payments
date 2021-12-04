@@ -5,12 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="59564bab-6689-417a-bdf5-d99c84f698e3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/model/Transfer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/services/TenmoService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/model/Account.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/services/AccountService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/services/TransferService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tenmo-server/src/main/resources/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tenmo-client/m02-capstone-client.iml" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-client/m02-capstone-client.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tenmo-client/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-client/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/model/Balance.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/model/Transfer.java" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/model/Transfer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/services/TenmoService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/view/ConsoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/view/ConsoleService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tenmo-client/target/classes/com/techelevator/tenmo/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-client/target/classes/com/techelevator/tenmo/App.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tenmo-client/target/classes/com/techelevator/tenmo/model/Balance.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tenmo-client/target/classes/com/techelevator/tenmo/model/Transfer.class" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-client/target/classes/com/techelevator/tenmo/model/Transfer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tenmo-client/target/classes/com/techelevator/tenmo/model/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-client/target/classes/com/techelevator/tenmo/model/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tenmo-client/target/classes/com/techelevator/tenmo/services/TenmoService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tenmo-client/target/classes/com/techelevator/view/ConsoleService.class" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-client/target/classes/com/techelevator/view/ConsoleService.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +41,21 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="JpbToolWindowState">
+    <option name="myId2FirstActivated">
+      <map>
+        <entry key="JPA Structure" value="true" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="true" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
+      </map>
+    </option>
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.haulmont.jpb.jpaPalette" value="false" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="false" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectId" id="21i1CpZp3aVlg8QPC2Yz0BEdAi2" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -38,7 +67,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
-  <component name="RunManager" selected="Application.App">
+  <component name="RunManager" selected="Application.TenmoApplication">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.techelevator.tenmo.App" />
       <module name="m02-capstone-client" />
@@ -78,11 +107,27 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ConsoleServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="m02-capstone-client" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.techelevator.view.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.techelevator.view" />
+      <option name="MAIN_CLASS_NAME" value="com.techelevator.view.ConsoleServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.TenmoApplication" />
+        <item itemvalue="JUnit.ConsoleServiceTest" />
         <item itemvalue="Application.App" />
         <item itemvalue="Application.DemoApplication" />
-        <item itemvalue="Application.TenmoApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -107,5 +152,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
