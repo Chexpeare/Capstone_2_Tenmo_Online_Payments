@@ -7,7 +7,7 @@ import com.techelevator.tenmo.model.UserCredentials;
 import com.techelevator.tenmo.services.AccountService;
 import com.techelevator.tenmo.services.AuthenticationService;
 import com.techelevator.tenmo.services.AuthenticationServiceException;
-import com.techelevator.tenmo.services.TransferService;
+//import com.techelevator.tenmo.services.TransferService;
 
 import java.math.BigDecimal;
 
@@ -31,7 +31,7 @@ public class App {
 	private AuthenticatedUser currentUser;
 	private final ConsoleService console;
 	private final AuthenticationService authenticationService;
-//	private AccountService accountService;
+	private AccountService accountService;
 
 	public static void main(String[] args) {
     	App app = new App(new ConsoleService(System.in, System.out), new AuthenticationService(API_BASE_URL));
@@ -81,13 +81,9 @@ public class App {
 
 	private void viewCurrentBalance() {
 		// TODO !!==IMPLEMENTATION_IN_PROGRESS==!! : viewCurrentBalance()
-		AccountService accountService = new AccountService(API_BASE_URL, currentUser);
-
-//		BigDecimal balance = Account.getBalance();
-//		System.out.println("Your current account balance is: $" + balance);
 
 		try {
-			System.out.println("Your current account balance is: $" + accountService.getAccountBalance());
+			console.displayToConsole("Your current account balance is: $" + accountService.getAccountBalance());
 		} catch (NullPointerException e) {
 			System.out.println("Account empty.");
 		}
@@ -96,10 +92,10 @@ public class App {
 	private void viewTransferHistory() {
 		// TODO !!==IMPLEMENTATION_IN_PROGRESS==!! : viewTransferHistory()
 		System.out.println("viewTransferHistory(): IMPLEMENTATION_IN_PROGRESS");
-		TransferService transferService = new TransferService(API_BASE_URL, currentUser);
+//		TransferService transferService = new TransferService(API_BASE_URL, currentUser);
 
 		try {
-			transferService.getAllTransfers();
+//			transferService.getAllTransfers();
 		} catch (NullPointerException e) {
 			System.out.println("No transfers found");
 		}
@@ -110,7 +106,7 @@ public class App {
 			if (enteredTransferID == 0) {
 				mainMenu();
 			}
-			transferService.getSingleTransfer(enteredTransferID);
+//			transferService.getSingleTransfer(enteredTransferID);
 		} catch (NullPointerException e) {
 			System.out.println("Transfer ID Invalid.");
 		} catch (NumberFormatException e) {
@@ -128,7 +124,7 @@ public class App {
 		System.out.println("sendBucks(): not yet implemented.");
 //		TenmoService tenmoService = null;
 //		assert false;
-		TransferService transferService = new TransferService(API_BASE_URL, currentUser);
+//		TransferService transferService = new TransferService(API_BASE_URL, currentUser);
 		AccountService accountService = new AccountService(API_BASE_URL, currentUser);
 
 		try {
@@ -147,9 +143,9 @@ public class App {
 
 		try {
 
-			newTransfer = transferService.createTransfer(currentUser.getUser().getId(), enteredUserID, enteredAmount);
+//			newTransfer = transferService.createTransfer(currentUser.getUser().getId(), enteredUserID, enteredAmount);
 
-			newTransferCheck = transferService.getSingleTransfer(newTransfer.getTransferId());
+//			newTransferCheck = transferService.getSingleTransfer(newTransfer.getTransfer_id());
 
 			if (!newTransferCheck.equals(null)) {
 				System.out.println("Transfer successfully processed");
@@ -224,6 +220,7 @@ public class App {
 			UserCredentials credentials = collectUserCredentials();
 		    try {
 				currentUser = authenticationService.login(credentials);
+				accountService = new AccountService(API_BASE_URL, currentUser);
 			} catch (AuthenticationServiceException e) {
 				System.out.println("LOGIN ERROR: " + e.getMessage());
 				System.out.println("Please attempt to login again.");

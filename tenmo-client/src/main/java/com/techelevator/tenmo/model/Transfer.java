@@ -3,63 +3,52 @@ package com.techelevator.tenmo.model;
 import java.math.BigDecimal;
 
 public class Transfer {
-    private int transferId;
-    private int typeId;
-    private int status;
-    private int accountFrom;
-    private int accountTo;
+
+    private int transfer_id;
+    private int transfer_type_id;
+    private int transfer_status_id;
+    private int account_from;
+    private int account_to;
     private BigDecimal amount;
-    private int userIdFrom;
-    private int userIdTo;
-    private String transferType;
-    private String transferTypeId;
-    private String transferStatus;
-    private String transferStatusId;
-    private String usernameFrom;
-    private String usernameTo;
 
-    public Transfer(){
-
+    public int getTransfer_id() {
+        return transfer_id;
     }
 
-    public int getTransferId() {
-        return transferId;
+    public void setTransfer_id(int transfer_id) {
+        this.transfer_id = transfer_id;
     }
 
-    public void setTransferId(int transferId) {
-        this.transferId = transferId;
+    public int getTransfer_type_id() {
+        return transfer_type_id;
     }
 
-    public int getTypeId() {
-        return typeId;
+    public void setTransfer_type_id(int transfer_type_id) {
+        this.transfer_type_id = transfer_type_id;
     }
 
-    public void setTypeId(int typeId) {
-        this.typeId = typeId;
+    public int getTransfer_status_id() {
+        return transfer_status_id;
     }
 
-    public int getStatus() {
-        return status;
+    public void setTransfer_status_id(int transfer_status_id) {
+        this.transfer_status_id = transfer_status_id;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public int getAccount_from() {
+        return account_from;
     }
 
-    public int getAccountFrom() {
-        return accountFrom;
+    public void setAccount_from(int account_from) {
+        this.account_from = account_from;
     }
 
-    public void setAccountFrom(int accountFrom) {
-        this.accountFrom = accountFrom;
+    public int getAccount_to() {
+        return account_to;
     }
 
-    public int getAccountTo() {
-        return accountTo;
-    }
-
-    public void setAccountTo(int accountTo) {
-        this.accountTo = accountTo;
+    public void setAccount_to(int account_to) {
+        this.account_to = account_to;
     }
 
     public BigDecimal getAmount() {
@@ -68,87 +57,5 @@ public class Transfer {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
-    }
-
-    public long getUserIdFrom() {
-        return userIdFrom;
-    }
-
-    public void setUserIdFrom(int userIdFrom) {
-        this.userIdFrom = userIdFrom;
-    }
-
-    public long getUserIdTo() {
-        return userIdTo;
-    }
-
-    public void setUserIdTo(int userIdTo) {
-        this.userIdTo = userIdTo;
-    }
-
-    public String getTransferType() {
-        return transferType;
-    }
-
-    public void setTransferType(String transferType) {
-        this.transferType = transferType;
-    }
-
-    public String getTransferStatus() {
-        return transferStatus;
-    }
-
-    public void setTransferStatus(String transferStatus) {
-        this.transferStatus = transferStatus;
-    }
-
-    public String getUsernameFrom() {
-        return usernameFrom;
-    }
-
-    public void setUsernameFrom(String usernameFrom) {
-        this.usernameFrom = usernameFrom;
-    }
-
-    public String getUsernameTo() {
-        return usernameTo;
-    }
-
-    public void setUsernameTo(String usernameTo) {
-        this.usernameTo = usernameTo;
-    }
-
-    @Override
-    public String toString() {
-        return "Transfer{" +
-                "transferId=" + transferId +
-                ", transferTypeId=" + transferTypeId +
-                ", transferStatusId=" + transferStatusId +
-                ", accountFrom=" + accountFrom +
-                ", accountTo=" + accountTo +
-                ", amount=" + amount +
-                ", userIdFrom=" + userIdFrom +
-                ", userId_To=" + userIdTo +
-                ", transferType='" + transferType + '\'' +
-                ", transferStatus='" + transferStatus + '\'' +
-                ", usernameFrom='" + usernameFrom + '\'' +
-                ", usernameTo='" + usernameTo + '\'' +
-                '}';
-    }
-
-    public void setTransferTypeId(String transferTypeId) {
-        this.transferTypeId = transferTypeId;
-    }
-
-    public String getTransferTypeId() {
-        return transferTypeId;
-    }
-
-    public String getTransferStatusId() {
-        return transferStatusId;
-    }
-
-    public void setTransferStatusId(String transferStatusId) {
-        this.transferStatusId = transferStatusId;
     }
 }

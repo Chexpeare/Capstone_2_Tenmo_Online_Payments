@@ -11,7 +11,6 @@ public class Account {
     public long getAccountId() {
         return accountId;
     }
-
     public void setAccountId(long accountId) {
         this.accountId = accountId;
     }
@@ -19,7 +18,6 @@ public class Account {
     public long getUserId() {
         return userId;
     }
-
     public void setUserId(long userId) {
         this.userId = userId;
     }
@@ -27,7 +25,6 @@ public class Account {
     public static BigDecimal getBalance() {
         return balance;
     }
-
     public static void setBalance(BigDecimal balance) {
         Account.balance = balance;
     }

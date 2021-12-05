@@ -1,6 +1,5 @@
 package com.techelevator.view;
 
-
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -52,6 +51,10 @@ public class ConsoleService {
 		}
 		out.print(System.lineSeparator() + "Please choose an option >>> ");
 		out.flush();
+	}
+
+	public void displayToConsole(String accountBalance) {
+		out.print(accountBalance);
 	}
 
 	public String getUserInput(String prompt) {
