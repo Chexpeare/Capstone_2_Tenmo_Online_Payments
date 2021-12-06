@@ -1,5 +1,7 @@
 package com.techelevator.tenmo;
 
+import com.techelevator.tenmo.model.User;
+import com.techelevator.tenmo.services.TransferService;
 import com.techelevator.view.ConsoleService;
 import com.techelevator.tenmo.model.AuthenticatedUser;
 import com.techelevator.tenmo.model.Transfer;
@@ -8,6 +10,7 @@ import com.techelevator.tenmo.services.AccountService;
 import com.techelevator.tenmo.services.AuthenticationService;
 import com.techelevator.tenmo.services.AuthenticationServiceException;
 //import com.techelevator.tenmo.services.TransferService;
+
 
 import java.math.BigDecimal;
 
@@ -81,9 +84,8 @@ public class App {
 
 	private void viewCurrentBalance() {
 		// TODO !!==IMPLEMENTATION_IN_PROGRESS==!! : viewCurrentBalance()
-
 		try {
-			console.displayToConsole("Your current account balance is: $" + accountService.getAccountBalance());
+			console.displayToConsole("Your current account balance is: $" + accountService.getAccountBalance().getBalance());
 		} catch (NullPointerException e) {
 			System.out.println("Account empty.");
 		}
@@ -122,13 +124,14 @@ public class App {
 	private void sendBucks() {
 		// TODO !!==IMPLEMENTATION_IN_PROGRESS==!! : sendBucks()
 		System.out.println("sendBucks(): not yet implemented.");
-//		TenmoService tenmoService = null;
-//		assert false;
-//		TransferService transferService = new TransferService(API_BASE_URL, currentUser);
-		AccountService accountService = new AccountService(API_BASE_URL, currentUser);
+
+		TransferService transferService = new TransferService(API_BASE_URL, currentUser);
 
 		try {
-			accountService.findAllUsers();
+			for (User user : transferService.getListofUsers()) {
+				console.displayToConsole(user.toString());
+			}
+
 		} catch (NullPointerException e) {
 			System.out.println("Account empty.");
 		}
@@ -157,14 +160,12 @@ public class App {
 
 		} catch (NullPointerException f){
 
-			if(enteredAmount.compareTo(accountService.getAccountBalance()) == 1) {
+			if(enteredAmount.compareTo(accountService.getAccountBalance().getBalance()) == 1) {
 				System.out.println("Not enough balance.");
 			}
 
 		} catch (Exception e){
-
 			System.out.println();
-
 		}
 	}
 

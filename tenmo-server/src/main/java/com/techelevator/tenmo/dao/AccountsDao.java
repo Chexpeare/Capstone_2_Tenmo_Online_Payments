@@ -1,9 +1,9 @@
 package com.techelevator.tenmo.dao;
 
-import java.math.BigDecimal;
+import com.techelevator.tenmo.model.Account;
 
 public interface AccountsDao {
 
-    public BigDecimal getBalance(int id);
+    public Account getBalance(int id);
 
 }
