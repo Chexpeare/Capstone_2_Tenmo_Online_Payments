@@ -24,12 +24,10 @@ public class JdbcAccountsDao implements AccountsDao {
                 "WHERE users.user_id = ?;";
         Account account = null;
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
-//        while(results.next()) {
-//            account = mapRowToAccount(results);
-//            System.out.println(account);
-//        }
-        System.out.println(results);
-
+        while(results.next()) {
+            account = mapRowToAccount(results);
+            System.out.println(account);
+        }
         return account;
     }
 
