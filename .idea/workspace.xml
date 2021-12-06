@@ -7,6 +7,7 @@
     <list default="true" id="59564bab-6689-417a-bdf5-d99c84f698e3" name="Changes" comment="Rolling back to original file: AuthenticationController.java">
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_dbcp2_2_1_1.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_pool2_2_8_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tenmo-client/target/classes/com/techelevator/tenmo/services/TransferService.class" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/tenmo-server/src/main/java/com/techelevator/tenmo/controller/TransferController.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/tenmo-server/src/main/java/com/techelevator/tenmo/dao/JdbcTransferDao.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/tenmo-server/src/main/java/com/techelevator/tenmo/dao/TransferDao.java" afterDir="false" />
@@ -20,6 +21,7 @@
       <change beforePath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/services/AccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/services/AccountService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/services/TransferService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/services/TransferService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tenmo-client/target/classes/com/techelevator/tenmo/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-client/target/classes/com/techelevator/tenmo/App.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tenmo-client/target/classes/com/techelevator/tenmo/model/Account.class" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-client/target/classes/com/techelevator/tenmo/model/Account.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tenmo-client/target/classes/com/techelevator/tenmo/services/AccountService.class" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-client/target/classes/com/techelevator/tenmo/services/AccountService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tenmo-server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-server/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tenmo-server/src/main/java/com/techelevator/tenmo/controller/AccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-server/src/main/java/com/techelevator/tenmo/controller/AccountController.java" afterDir="false" />
@@ -189,13 +191,8 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/tenmo-server/src/main/java/com/techelevator/tenmo/dao/JdbcAccountsDao.java</url>
-          <line>38</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/services/AccountService.java</url>
-          <line>42</line>
+          <line>41</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
       </breakpoints>
