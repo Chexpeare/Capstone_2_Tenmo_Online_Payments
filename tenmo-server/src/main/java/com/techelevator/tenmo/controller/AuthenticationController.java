@@ -7,7 +7,11 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.techelevator.tenmo.dao.UserDao;
 import com.techelevator.tenmo.model.LoginDTO;
@@ -15,8 +19,6 @@ import com.techelevator.tenmo.model.RegisterUserDTO;
 import com.techelevator.tenmo.model.User;
 import com.techelevator.tenmo.security.jwt.TokenProvider;
 import org.springframework.web.server.ResponseStatusException;
-
-import java.math.BigDecimal;
 
 /**
  * Controller to authenticate users.
@@ -43,7 +45,7 @@ public class AuthenticationController {
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = tokenProvider.createToken(authentication, false);
-        
+
         User user = userDao.findByUsername(loginDto.getUsername());
 
         return new LoginResponse(jwt, user);
@@ -78,13 +80,12 @@ public class AuthenticationController {
             this.token = token;
         }
 
-		public User getUser() {
-			return user;
-		}
+        public User getUser() {
+            return user;
+        }
 
-		public void setUser(User user) {
-			this.user = user;
-		}
+        public void setUser(User user) {
+            this.user = user;
+        }
     }
 }
-
