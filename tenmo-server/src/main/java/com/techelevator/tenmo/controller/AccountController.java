@@ -16,10 +16,6 @@ public class AccountController {
     @Autowired
     UserDao userDao;
 
-//    public AccountController(AccountsDao accountsDao) {
-//        this.accountsDao = accountsDao;
-//    }
-
     @RequestMapping(path = "accounts/{id}", method = RequestMethod.GET)
     public Account getBalance(@PathVariable int id) {
 

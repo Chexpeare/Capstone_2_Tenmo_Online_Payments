@@ -28,14 +28,13 @@ public class TransferService {
         this.currentUser = currentUser;
     }
 
-    public List<User> getListofUsers() {
-        List<User> users = new ArrayList<>();
+    public User[] getListofUsers() {
+        User[] users = null;
         try {
-            users = restTemplate.exchange(API_BASE_URL + "/users", HttpMethod.GET, makeAuthEntity(), List.class).getBody();
-//            ResponseEntity<User> listOfUsers = restTemplate.exchange(API_BASE_URL + "/users", HttpMethod.GET, makeAuthEntity(), User.class);
+         users = restTemplate.exchange(API_BASE_URL + "/users", HttpMethod.GET, makeAuthEntity(), User[].class).getBody();
 
         } catch (RestClientResponseException e) {
-            System.out.println("Error getting users");
+            System.out.println("Error getting users" + e.getMessage());
         }
         return users;
     }

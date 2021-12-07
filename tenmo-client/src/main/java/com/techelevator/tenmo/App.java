@@ -13,6 +13,7 @@ import com.techelevator.tenmo.services.AuthenticationServiceException;
 
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class App {
 
@@ -126,7 +127,7 @@ public class App {
 		System.out.println("sendBucks(): not yet implemented.");
 
 		TransferService transferService = new TransferService(API_BASE_URL, currentUser);
-
+		//ist<User> users = transferService.getListofUsers();
 		try {
 			for (User user : transferService.getListofUsers()) {
 				console.displayToConsole(user.toString());
