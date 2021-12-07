@@ -1,20 +1,24 @@
 package com.techelevator.tenmo.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public class User {
+@Entity
+public class Users {
 
+   @Id
    private Long id;
    private String username;
    private String password;
    private boolean activated;
    private Set<Authority> authorities = new HashSet<>();
 
-   public User() { }
+   public Users() { }
 
-   public User(Long id, String username, String password, String authorities) {
+   public Users(Long id, String username, String password, String authorities) {
       this.id = id;
       this.username = username;
       this.password = password;
@@ -72,12 +76,12 @@ public class User {
    public boolean equals(Object o) {
       if (this == o) return true;
       if (o == null || getClass() != o.getClass()) return false;
-      User user = (User) o;
-      return id == user.id &&
-              activated == user.activated &&
-              Objects.equals(username, user.username) &&
-              Objects.equals(password, user.password) &&
-              Objects.equals(authorities, user.authorities);
+      Users users = (Users) o;
+      return id == users.id &&
+              activated == users.activated &&
+              Objects.equals(username, users.username) &&
+              Objects.equals(password, users.password) &&
+              Objects.equals(authorities, users.authorities);
    }
 
    @Override

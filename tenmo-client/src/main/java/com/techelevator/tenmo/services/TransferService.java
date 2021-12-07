@@ -31,7 +31,12 @@ public class TransferService {
     public User[] getListofUsers() {
         User[] users = null;
         try {
+<<<<<<< HEAD
          users = restTemplate.exchange(API_BASE_URL + "/users", HttpMethod.GET, makeAuthEntity(), User[].class).getBody();
+=======
+            users = restTemplate.exchange(API_BASE_URL + "users", HttpMethod.GET, makeAuthEntity(), List.class).getBody();
+//            ResponseEntity<User> listOfUsers = restTemplate.exchange(API_BASE_URL + "/users", HttpMethod.GET, makeAuthEntity(), User.class);
+>>>>>>> c77c7cc4b61b72304bc8205776da987095c942c6
 
         } catch (RestClientResponseException e) {
             System.out.println("Error getting users" + e.getMessage());
@@ -67,7 +72,6 @@ public class TransferService {
         }
         return currentTransfer;
     }
-
 
     //Get all Transfers by UserID
 

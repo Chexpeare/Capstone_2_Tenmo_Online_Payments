@@ -1,6 +1,6 @@
 package com.techelevator.tenmo.dao;
 
-import com.techelevator.tenmo.model.User;
+import com.techelevator.tenmo.model.Users;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -13,13 +13,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class JdbcUserDao implements UserDao {
+public class JdbcUsersDao implements UsersDao {
 
     private static final BigDecimal STARTING_BALANCE = new BigDecimal("1000.00");
     private JdbcTemplate jdbcTemplate;
 
-    public JdbcUserDao(JdbcTemplate jdbcTemplate) {
+    public JdbcUsersDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @Override
+    public List<Users> findAll() {
+        List<Users> users = new ArrayList<>();
+        String sql = "SELECT user_id, username, password_hash FROM users;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        while(results.next()) {
+            Users user = mapRowToUser(results);
+            users.add(user);
+            System.out.println(user);
+        }
+        return users;
     }
 
     @Override
@@ -34,19 +47,7 @@ public class JdbcUserDao implements UserDao {
     }
 
     @Override
-    public List<User> findAll() {
-        List<User> users = new ArrayList<>();
-        String sql = "SELECT user_id, username, password_hash FROM users;";
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
-        while(results.next()) {
-            User user = mapRowToUser(results);
-            users.add(user);
-        }
-        return users;
-    }
-
-    @Override
-    public User findByUsername(String username) throws UsernameNotFoundException {
+    public Users findByUsername(String username) throws UsernameNotFoundException {
         String sql = "SELECT user_id, username, password_hash FROM users WHERE username ILIKE ?;";
         SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, username);
         if (rowSet.next()){
@@ -79,13 +80,13 @@ public class JdbcUserDao implements UserDao {
         return true;
     }
 
-    private User mapRowToUser(SqlRowSet rs) {
-        User user = new User();
-        user.setId(rs.getLong("user_id"));
-        user.setUsername(rs.getString("username"));
-        user.setPassword(rs.getString("password_hash"));
-        user.setActivated(true);
-        user.setAuthorities("USER");
-        return user;
+    private Users mapRowToUser(SqlRowSet results) {
+        Users users = new Users();
+        users.setId(results.getLong("user_id"));
+        users.setUsername(results.getString("username"));
+        users.setPassword(results.getString("password_hash"));
+        users.setActivated(true);
+        users.setAuthorities("USER");
+        return users;
     }
 }

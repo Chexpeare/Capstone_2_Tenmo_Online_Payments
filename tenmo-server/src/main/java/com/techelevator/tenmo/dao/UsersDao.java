@@ -1,16 +1,16 @@
 package com.techelevator.tenmo.dao;
 
-import com.techelevator.tenmo.model.User;
+import com.techelevator.tenmo.model.Users;
 
 import java.util.List;
 
-public interface UserDao {
+public interface UsersDao {
 
-    List<User> findAll();
-
-    User findByUsername(String username);
+    List<Users> findAll();
 
     int findIdByUsername(String username);
+
+    Users findByUsername(String username);
 
     boolean create(String username, String password);
 

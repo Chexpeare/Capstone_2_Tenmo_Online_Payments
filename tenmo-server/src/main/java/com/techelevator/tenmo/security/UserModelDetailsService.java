@@ -1,8 +1,8 @@
 package com.techelevator.tenmo.security;
 
 
-import com.techelevator.tenmo.dao.UserDao;
-import com.techelevator.tenmo.model.User;
+import com.techelevator.tenmo.dao.UsersDao;
+import com.techelevator.tenmo.model.Users;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
@@ -22,28 +22,28 @@ public class UserModelDetailsService implements UserDetailsService {
 
     private final Logger log = LoggerFactory.getLogger(UserModelDetailsService.class);
 
-    private final UserDao userDao;
+    private final UsersDao usersDao;
 
-    public UserModelDetailsService(UserDao userDao) {
-        this.userDao = userDao;
+    public UserModelDetailsService(UsersDao usersDao) {
+        this.usersDao = usersDao;
     }
 
     @Override
     public UserDetails loadUserByUsername(final String login) {
         log.debug("Authenticating user '{}'", login);
         String lowercaseLogin = login.toLowerCase();
-        return createSpringSecurityUser(lowercaseLogin, userDao.findByUsername(lowercaseLogin));
+        return createSpringSecurityUser(lowercaseLogin, usersDao.findByUsername(lowercaseLogin));
     }
 
-    private org.springframework.security.core.userdetails.User createSpringSecurityUser(String lowercaseLogin, User user) {
-        if (!user.isActivated()) {
+    private org.springframework.security.core.userdetails.User createSpringSecurityUser(String lowercaseLogin, Users users) {
+        if (!users.isActivated()) {
             throw new UserNotActivatedException("User " + lowercaseLogin + " was not activated");
         }
-        List<GrantedAuthority> grantedAuthorities = user.getAuthorities().stream()
+        List<GrantedAuthority> grantedAuthorities = users.getAuthorities().stream()
                 .map(authority -> new SimpleGrantedAuthority(authority.getName()))
                 .collect(Collectors.toList());
-        return new org.springframework.security.core.userdetails.User(user.getUsername(),
-                user.getPassword(),
+        return new org.springframework.security.core.userdetails.User(users.getUsername(),
+                users.getPassword(),
                 grantedAuthorities);
     }
 }
