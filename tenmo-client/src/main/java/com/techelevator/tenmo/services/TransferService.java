@@ -31,7 +31,7 @@ public class TransferService {
     public List<User> getListofUsers() {
         List<User> users = new ArrayList<>();
         try {
-            users = restTemplate.exchange(API_BASE_URL + "/users", HttpMethod.GET, makeAuthEntity(), List.class).getBody();
+            users = restTemplate.exchange(API_BASE_URL + "users", HttpMethod.GET, makeAuthEntity(), List.class).getBody();
 //            ResponseEntity<User> listOfUsers = restTemplate.exchange(API_BASE_URL + "/users", HttpMethod.GET, makeAuthEntity(), User.class);
 
         } catch (RestClientResponseException e) {
@@ -68,7 +68,6 @@ public class TransferService {
         }
         return currentTransfer;
     }
-
 
     //Get all Transfers by UserID
 

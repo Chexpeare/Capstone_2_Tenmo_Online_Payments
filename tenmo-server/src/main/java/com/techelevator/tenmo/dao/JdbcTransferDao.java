@@ -1,6 +1,6 @@
 package com.techelevator.tenmo.dao;
 
-import com.techelevator.tenmo.model.User;
+import com.techelevator.tenmo.model.Users;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -10,7 +10,7 @@ public class JdbcTransferDao implements TransferDao {
 
 
     @Override
-    public List<User> listOfUsers() {
+    public List<Users> listOfUsers() {
         return null;
     }
 }

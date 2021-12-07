@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.techelevator.tenmo.dao.UserDao;
+import com.techelevator.tenmo.dao.UsersDao;
 import com.techelevator.tenmo.model.LoginDTO;
 import com.techelevator.tenmo.model.RegisterUserDTO;
-import com.techelevator.tenmo.model.User;
+import com.techelevator.tenmo.model.Users;
 import com.techelevator.tenmo.security.jwt.TokenProvider;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -28,12 +28,12 @@ public class AuthenticationController {
 
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
-    private UserDao userDao;
+    private UsersDao usersDao;
 
-    public AuthenticationController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder, UserDao userDao) {
+    public AuthenticationController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder, UsersDao usersDao) {
         this.tokenProvider = tokenProvider;
         this.authenticationManagerBuilder = authenticationManagerBuilder;
-        this.userDao = userDao;
+        this.usersDao = usersDao;
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -46,15 +46,15 @@ public class AuthenticationController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = tokenProvider.createToken(authentication, false);
 
-        User user = userDao.findByUsername(loginDto.getUsername());
+        Users users = usersDao.findByUsername(loginDto.getUsername());
 
-        return new LoginResponse(jwt, user);
+        return new LoginResponse(jwt, users);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public void register(@Valid @RequestBody RegisterUserDTO newUser) {
-        if (!userDao.create(newUser.getUsername(), newUser.getPassword())) {
+        if (!usersDao.create(newUser.getUsername(), newUser.getPassword())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User registration failed.");
         }
     }
@@ -65,11 +65,11 @@ public class AuthenticationController {
     static class LoginResponse {
 
         private String token;
-        private User user;
+        private Users users;
 
-        LoginResponse(String token, User user) {
+        LoginResponse(String token, Users users) {
             this.token = token;
-            this.user = user;
+            this.users = users;
         }
 
         public String getToken() {
@@ -80,12 +80,12 @@ public class AuthenticationController {
             this.token = token;
         }
 
-        public User getUser() {
-            return user;
+        public Users getUser() {
+            return users;
         }
 
-        public void setUser(User user) {
-            this.user = user;
+        public void setUser(Users users) {
+            this.users = users;
         }
     }
 }

@@ -9,7 +9,6 @@ import com.techelevator.tenmo.model.UserCredentials;
 import com.techelevator.tenmo.services.AccountService;
 import com.techelevator.tenmo.services.AuthenticationService;
 import com.techelevator.tenmo.services.AuthenticationServiceException;
-//import com.techelevator.tenmo.services.TransferService;
 
 
 import java.math.BigDecimal;
@@ -83,7 +82,7 @@ public class App {
 	}
 
 	private void viewCurrentBalance() {
-		// TODO !!==IMPLEMENTATION_IN_PROGRESS==!! : viewCurrentBalance()
+		// TODO !!==COMPLETED==!! : viewCurrentBalance()
 		try {
 			console.displayToConsole("Your current account balance is: $" + accountService.getAccountBalance().getBalance());
 		} catch (NullPointerException e) {
@@ -131,7 +130,6 @@ public class App {
 			for (User user : transferService.getListofUsers()) {
 				console.displayToConsole(user.toString());
 			}
-
 		} catch (NullPointerException e) {
 			System.out.println("Account empty.");
 		}
