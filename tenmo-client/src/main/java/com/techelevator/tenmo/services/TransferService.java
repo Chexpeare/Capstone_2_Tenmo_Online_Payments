@@ -1,19 +1,14 @@
 package com.techelevator.tenmo.services;
 
-import com.techelevator.tenmo.model.Account;
 import com.techelevator.tenmo.model.AuthenticatedUser;
 import com.techelevator.tenmo.model.Transfer;
 import com.techelevator.tenmo.model.User;
 import org.springframework.http.*;
 import org.springframework.web.client.ResourceAccessException;
-import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;
-import java.sql.SQLOutput;
-import java.util.ArrayList;
-import java.util.List;
 
 public class TransferService {
 
@@ -31,12 +26,7 @@ public class TransferService {
     public User[] getListofUsers() {
         User[] users = null;
         try {
-//<<<<<<< HEAD
-                    users = restTemplate.exchange(API_BASE_URL + "/users", HttpMethod.GET, makeAuthEntity(), User[].class).getBody();
-//=======
-//            users = restTemplate.exchange(API_BASE_URL + "users", HttpMethod.GET, makeAuthEntity(), List.class).getBody();
-//            ResponseEntity<User> listOfUsers = restTemplate.exchange(API_BASE_URL + "/users", HttpMethod.GET, makeAuthEntity(), User.class);
-//>>>>>>> c77c7cc4b61b72304bc8205776da987095c942c6
+            users = restTemplate.exchange(API_BASE_URL + "/users", HttpMethod.GET, makeAuthEntity(), User[].class).getBody();
 
         } catch (RestClientResponseException e) {
             System.out.println("Error getting users" + e.getMessage());
@@ -74,13 +64,11 @@ public class TransferService {
     }
 
     //Get all Transfers by UserID
-
     public Transfer[] getAllTransfers() {
 
         Transfer[] allTransfers = null;
 
         try {
-
             System.out.println("-------------------------------------------");
             System.out.println("Transfers");
             System.out.println("ID          From/To                 Amount");
@@ -100,7 +88,6 @@ public class TransferService {
             System.out.println("Error getting users");
         }
         return allTransfers;
-
     }
 
     public Transfer createTransfer(long user_id_from, long user_id_to, BigDecimal amount) {
@@ -112,7 +99,6 @@ public class TransferService {
         newTransfer.setAmount(amount);
 
         try {
-
             newTransfer = restTemplate.postForObject(API_BASE_URL + "transfers", makeTransferEntity(newTransfer), Transfer.class);
 
         } catch (RestClientResponseException e) {
@@ -120,19 +106,17 @@ public class TransferService {
             BigDecimal zero = new BigDecimal(0);
 
             if(newTransfer.getAmount().compareTo(zero) == 1) {
-
                 System.out.println("Transfer failed");
-            }else{
+            } else {
                 System.out.println("Entered amount must be a positive amount.");
             }
 
         } catch (ResourceAccessException e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
 
-        } catch (NullPointerException f){
+        } catch (NullPointerException f) {
             System.out.println("Caught null pointer exception in create transfer in transfer service");
         }
-
         return newTransfer;
     }
 
@@ -147,7 +131,6 @@ public class TransferService {
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(currentUser.getToken());
         return new HttpEntity<>(headers);
-
-
     }
+
 }
