@@ -28,7 +28,7 @@ public class User {
 
 		StringBuilder listFormatting = new StringBuilder();
 		Formatter usersToPrint = new Formatter(listFormatting);
-		usersToPrint.format("%s  %-60s", this.id, this.username);
+		usersToPrint.format("%-10s  %-10s", this.id, this.username);
 
 		return listFormatting.toString();
 	}
