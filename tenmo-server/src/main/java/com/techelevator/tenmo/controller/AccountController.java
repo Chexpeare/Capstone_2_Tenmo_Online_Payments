@@ -13,13 +13,13 @@ public class AccountController {
 
     @Autowired
     AccountsDao accountsDao;
-<<<<<<< HEAD
-    @Autowired
-    UserDao userDao;
-=======
+//<<<<<<< HEAD
 //    @Autowired
 //    UserDao userDao;
->>>>>>> c77c7cc4b61b72304bc8205776da987095c942c6
+//=======
+////    @Autowired
+////    UserDao userDao;
+//>>>>>>> c77c7cc4b61b72304bc8205776da987095c942c6
 
     @RequestMapping(path = "accounts/{id}", method = RequestMethod.GET)
     public Account getBalance(@PathVariable int id) {
