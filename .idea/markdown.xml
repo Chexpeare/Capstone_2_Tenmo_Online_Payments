@@ -6,6 +6,9 @@
       <entry key="MermaidLanguageExtension" value="false" />
       <entry key="PlantUMLLanguageExtension" value="false" />
     </enabledExtensions>
+<<<<<<< HEAD
     <option name="fontSize" value="18" />
+=======
+>>>>>>> 659a59726cade9743757766061b05e8c7ee22bf1
   </component>
 </project>
