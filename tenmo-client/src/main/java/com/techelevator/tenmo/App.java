@@ -123,12 +123,12 @@ public class App {
 
 	private void sendBucks() {
 		// TODO !!==IMPLEMENTATION_IN_PROGRESS==!! : sendBucks()
-		System.out.println("sendBucks(): WIP - Not fully implemented.\n");
+		System.out.println("sendBucks(): IMPLEMENTATION_IN_PROGRESS.\n");
 
-		System.out.println("-------------------------------------------");
+		System.out.println("---------------------------------");
 		System.out.println("Users");
 		System.out.println("ID          Name");
-		System.out.println("-------------------------------------------");
+		System.out.println("---------------------------------");
 
 		TransferService transferService = new TransferService(API_BASE_URL, currentUser);
 		//ist<User> users = transferService.getListofUsers();
@@ -139,15 +139,17 @@ public class App {
 		} catch (NullPointerException e) {
 			System.out.println("Account empty.");
 		}
+
 		Transfer newTransfer = new Transfer();
 		Transfer newTransferCheck = new Transfer();
 
-		Integer enteredUserID = console.getUserInputInteger("\nEnter ID of user you are sending to (0 to cancel)");
+		Integer enteredUserID = console.getUserInputInteger("---------------------------------" +
+				"\nEnter ID of user you are sending to (0 to cancel)");
 		if (enteredUserID == 0) {
 			mainMenu();
 		}
 
-		BigDecimal enteredAmount = console.getUserInputBigD("Enter amount: ");
+		BigDecimal enteredAmount = console.getUserInputBigD("Enter amount");
 
 		try {
 
