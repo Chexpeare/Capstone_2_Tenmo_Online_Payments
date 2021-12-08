@@ -143,7 +143,7 @@ public class App {
 		Transfer newTransfer = new Transfer();
 		Transfer newTransferCheck = new Transfer();
 
-		Integer enteredUserID = console.getUserInputInteger("---------------------------------" +
+		Integer enteredUserID = console.getUserInputInteger("---------------------------------\n" +
 				"\nEnter ID of user you are sending to (0 to cancel)");
 		if (enteredUserID == 0) {
 			mainMenu();
