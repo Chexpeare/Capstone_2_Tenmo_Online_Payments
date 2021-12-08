@@ -65,7 +65,7 @@
       <recent name="$PROJECT_DIR$/tenmo-server/src/main/java/com/techelevator/tenmo/model" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.App">
+  <component name="RunManager" selected="Application.TenmoApplication">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.techelevator.tenmo.App" />
       <module name="m02-capstone-client" />
@@ -122,8 +122,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.App" />
         <item itemvalue="Application.TenmoApplication" />
+        <item itemvalue="Application.App" />
         <item itemvalue="JUnit.ConsoleServiceTest" />
         <item itemvalue="Application.DemoApplication" />
       </list>
