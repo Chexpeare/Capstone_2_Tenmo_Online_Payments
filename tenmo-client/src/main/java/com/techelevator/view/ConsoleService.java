@@ -44,21 +44,21 @@ public class ConsoleService {
 	}
 
 	private void displayMenuOptions(Object[] options) {
-		out.println();
+		out.print(System.lineSeparator());
 		for (int i = 0; i < options.length; i++) {
 			int optionNum = i + 1;
-			out.println(optionNum + ") " + options[i]);
+			out.println("[" + optionNum + "] " + options[i]);
 		}
-		out.print(System.lineSeparator() + "Please choose an option >>> ");
+		out.print(System.lineSeparator() + "Please choose an option: ");
 		out.flush();
 	}
 
-	public void displayToConsole(String accountBalance) {
-		out.print(accountBalance);
+	public void displayToConsole(String listOfUsers) {
+		out.print(listOfUsers);
 	}
 
 	public String getUserInput(String prompt) {
-		out.print(prompt + ": ");
+		out.print(prompt);
 		out.flush();
 		return in.nextLine();
 	}
@@ -66,7 +66,7 @@ public class ConsoleService {
 	public Integer getUserInputInteger(String prompt) {
 		Integer result = null;
 		do {
-			out.print(prompt + ": ");
+			out.print(prompt);
 			out.flush();
 			String userInput = in.nextLine();
 			try {
@@ -78,10 +78,10 @@ public class ConsoleService {
 		return result;
 	}
 
-	public BigDecimal getUserInputBigD(String prompt) {
+	public BigDecimal getUserInputAmount(String prompt) {
 		BigDecimal result = null;
 		do {
-			out.print(prompt + ": ");
+			out.print(prompt);
 			out.flush();
 			String userInput = in.nextLine();
 

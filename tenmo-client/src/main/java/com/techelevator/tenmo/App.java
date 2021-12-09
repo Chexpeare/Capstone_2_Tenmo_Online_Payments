@@ -10,17 +10,15 @@ import com.techelevator.tenmo.services.AccountService;
 import com.techelevator.tenmo.services.AuthenticationService;
 import com.techelevator.tenmo.services.AuthenticationServiceException;
 
-
 import java.math.BigDecimal;
-import java.util.List;
 
 public class App {
 
 	private static final String API_BASE_URL = "http://localhost:8080/";
-    
-    private static final String MENU_OPTION_EXIT = "Exit";
+
     private static final String LOGIN_MENU_OPTION_REGISTER = "Register";
 	private static final String LOGIN_MENU_OPTION_LOGIN = "Login";
+	private static final String MENU_OPTION_EXIT = "Exit";
 	private static final String[] LOGIN_MENU_OPTIONS = { LOGIN_MENU_OPTION_REGISTER, LOGIN_MENU_OPTION_LOGIN, MENU_OPTION_EXIT };
 	private static final String MAIN_MENU_OPTION_VIEW_BALANCE = "View your current balance";
 	private static final String MAIN_MENU_OPTION_SEND_BUCKS = "Send TE bucks";
@@ -36,21 +34,21 @@ public class App {
 	private final AuthenticationService authenticationService;
 	private AccountService accountService;
 
+	public App(ConsoleService console, AuthenticationService authenticationService) {
+		this.console = console;
+		this.authenticationService = authenticationService;
+	}
+
 	public static void main(String[] args) {
     	App app = new App(new ConsoleService(System.in, System.out), new AuthenticationService(API_BASE_URL));
     	app.run();
     }
 
-    public App(ConsoleService console, AuthenticationService authenticationService) {
-		this.console = console;
-		this.authenticationService = authenticationService;
-	}
-
 	public void run() {
 		System.out.println("*********************");
 		System.out.println("* Welcome to TEnmo! *");
 		System.out.println("*********************");
-		
+
 		registerAndLogin();
 		mainMenu();
 	}
@@ -62,14 +60,14 @@ public class App {
 				String choice = (String) console.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 				if (MAIN_MENU_OPTION_VIEW_BALANCE.equals(choice)) {
 					viewCurrentBalance();
-				} else if (MAIN_MENU_OPTION_VIEW_PAST_TRANSFERS.equals(choice)) {
-					viewTransferHistory();
-				} else if (MAIN_MENU_OPTION_VIEW_PENDING_REQUESTS.equals(choice)) {
-					viewPendingRequests();
 				} else if (MAIN_MENU_OPTION_SEND_BUCKS.equals(choice)) {
 					sendBucks();
+				} else if (MAIN_MENU_OPTION_VIEW_PAST_TRANSFERS.equals(choice)) {
+					viewTransferHistory();
 				} else if (MAIN_MENU_OPTION_REQUEST_BUCKS.equals(choice)) {
 					requestBucks();
+				} else if (MAIN_MENU_OPTION_VIEW_PENDING_REQUESTS.equals(choice)) {
+					viewPendingRequests();
 				} else if (MAIN_MENU_OPTION_LOGIN.equals(choice)) {
 					login();
 				} else {
@@ -78,7 +76,8 @@ public class App {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
+//			e.printStackTrace();
 		}
 	}
 
@@ -103,7 +102,6 @@ public class App {
 		}
 
 		Integer enteredTransferID = console.getUserInputInteger("Please enter transfer ID to view details (0 to cancel): ");
-
 		try {
 			if (enteredTransferID == 0) {
 				mainMenu();
@@ -112,7 +110,7 @@ public class App {
 		} catch (NullPointerException e) {
 			System.out.println("Transfer ID Invalid.");
 		} catch (NumberFormatException e) {
-			System.out.println("Transfer ID Invalid");
+			System.out.println("Transfer ID Invalid.");
 		}
 	}
 
@@ -123,15 +121,13 @@ public class App {
 
 	private void sendBucks() {
 		// TODO !!==IMPLEMENTATION_IN_PROGRESS==!! : sendBucks()
-		System.out.println("sendBucks(): IMPLEMENTATION_IN_PROGRESS.\n");
-
+		System.out.println("\n***** sendBucks(): IMPLEMENTATION_IN_PROGRESS. *****");
 		System.out.println("---------------------------------");
 		System.out.println("Users");
 		System.out.println("ID          Name");
 		System.out.println("---------------------------------");
 
 		TransferService transferService = new TransferService(API_BASE_URL, currentUser);
-		//ist<User> users = transferService.getListofUsers();
 		try {
 			for (User user : transferService.getListofUsers()) {
 				console.displayToConsole(user.toString() + "\n");
@@ -140,25 +136,22 @@ public class App {
 			System.out.println("Account empty.");
 		}
 
-		Transfer newTransfer = new Transfer();
-		Transfer newTransferCheck = new Transfer();
-
 		Integer enteredUserID = console.getUserInputInteger("---------------------------------\n" +
-				"\nEnter ID of user you are sending to (0 to cancel)");
+				"Enter ID of user you are sending to (0 to cancel): ");
 		if (enteredUserID == 0) {
 			mainMenu();
 		}
 
-		BigDecimal enteredAmount = console.getUserInputBigD("Enter amount");
-
+		BigDecimal enteredAmount = console.getUserInputAmount("Enter Transfer Amount: ");
 		try {
-
-//			newTransfer = transferService.createTransfer(currentUser.getUser().getId(), enteredUserID, enteredAmount);
-
-//			newTransferCheck = transferService.getSingleTransfer(newTransfer.getTransfer_id());
+			Transfer newTransfer = new Transfer();
+			Transfer newTransferCheck = new Transfer();
+			newTransfer = transferService.createTransfer(currentUser.getUser().getId(), enteredUserID, enteredAmount);
+			newTransferCheck = transferService.getSingleTransfer(newTransfer.getTransfer_id());
 
 			if (!newTransferCheck.equals(null)) {
-				System.out.println("Transfer successfully processed");
+
+				System.out.println("Transfer successfully processed.");
 			}
 
 			if (newTransferCheck.equals(null)) {
@@ -168,19 +161,20 @@ public class App {
 		} catch (NullPointerException f){
 
 			if(enteredAmount.compareTo(accountService.getAccountBalance().getBalance()) == 1) {
-				System.out.println("Not enough balance.");
+				System.out.println("Not enough balance." + f.getMessage());
 			}
 
 		} catch (Exception e){
-			System.out.println();
+			System.out.println(e.getMessage());
 		}
 	}
 
 	private void requestBucks() {
 		// TODO Auto-generated method stub
 		System.out.println("requestBucks(): not yet implemented.");
+
 	}
-	
+
 	private void exitProgram() {
 		System.exit(0);
 	}
@@ -188,13 +182,12 @@ public class App {
 	private void registerAndLogin() {
 		while(!isAuthenticated()) {
 			String choice = (String)console.getChoiceFromOptions(LOGIN_MENU_OPTIONS);
-			if (LOGIN_MENU_OPTION_LOGIN.equals(choice)) {
-				login();
-			} else if (LOGIN_MENU_OPTION_REGISTER.equals(choice)) {
+			if (LOGIN_MENU_OPTION_REGISTER.equals(choice)) {
 				register();
+			} else if (LOGIN_MENU_OPTION_LOGIN.equals(choice)) {
+				login();
 			} else {
-				// the only other option on the login menu is to exit
-				exitProgram();
+				exitProgram();	// the only other option on the login menu is to exit
 			}
 		}
 	}
@@ -204,7 +197,7 @@ public class App {
 	}
 
 	private void register() {
-		System.out.println("Please register a new user account");
+		System.out.println("Please register a new user account.");
 		boolean isRegistered = false;
 		while (!isRegistered) //will keep looping until user is registered
 		{
@@ -221,7 +214,7 @@ public class App {
 	}
 
 	private void login() {
-		System.out.println("Please log in");
+		System.out.println("Please log in.");
 		currentUser = null;
 		while (currentUser == null) //will keep looping until user is logged in
 		{
@@ -235,10 +228,10 @@ public class App {
 			}
 		}
 	}
-	
+
 	private UserCredentials collectUserCredentials() {
-		String username = console.getUserInput("Username");
-		String password = console.getUserInput("Password");
+		String username = console.getUserInput("Username: ");
+		String password = console.getUserInput("Password: ");
 		return new UserCredentials(username, password);
 	}
 }

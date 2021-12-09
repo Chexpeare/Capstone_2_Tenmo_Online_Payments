@@ -36,8 +36,8 @@ public class TransferService {
 
     //Get single Transfer by Transfer ID
     public Transfer getSingleTransfer(long transferID) {
-        Transfer currentTransfer = null;
 
+        Transfer currentTransfer = null;
         try {
             ResponseEntity<Transfer> response =
                     restTemplate.exchange(API_BASE_URL + "transfers/" + transferID,
@@ -49,7 +49,6 @@ public class TransferService {
                 System.out.println("Transfer Details");
                 System.out.println("--------------------------------------------");
             }
-
             System.out.println("Id: " + currentTransfer.getTransfer_id());
             System.out.println("From: " + currentTransfer.getAccount_from());
             System.out.println("To: " + currentTransfer.getAccount_to());
@@ -90,7 +89,7 @@ public class TransferService {
         return allTransfers;
     }
 
-    public Transfer createTransfer(long user_id_from, long user_id_to, BigDecimal amount) {
+    public Transfer createTransfer(int userIdFrom, int userIdTo, BigDecimal amount) {
 
         Transfer newTransfer = new Transfer();
 
