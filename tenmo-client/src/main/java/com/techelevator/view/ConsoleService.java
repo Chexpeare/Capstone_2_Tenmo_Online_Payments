@@ -6,6 +6,8 @@ import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.util.Scanner;
 
+import static java.lang.Double.parseDouble;
+
 public class ConsoleService {
 
 	private final PrintWriter out;
@@ -78,19 +80,19 @@ public class ConsoleService {
 		return result;
 	}
 
-	public BigDecimal getUserInputAmount(String prompt) {
-		BigDecimal result = null;
+	public double getUserInputAmount(String prompt) {
+		double result = 0;
 		do {
 			out.print(prompt);
 			out.flush();
 			String userInput = in.nextLine();
 
 			try {
-				result = BigDecimal.valueOf(Double.parseDouble(userInput));
+				result = parseDouble(userInput);
 			} catch (NumberFormatException e) {
 				out.println(System.lineSeparator() + "*** " + userInput + " is not valid ***" + System.lineSeparator());
 			}
-		}while(result == null);
+		} while(result == 0);
 
 		return result;
 	}

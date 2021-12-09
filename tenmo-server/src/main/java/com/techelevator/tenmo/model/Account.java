@@ -2,11 +2,12 @@ package com.techelevator.tenmo.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.math.BigDecimal;
 
-@Entity
+//@Entity
 public class Account {
 
-    @Id
+//    @Id
     private long accountId;
     private long userId;
     private double balance;

@@ -6,10 +6,10 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-@Entity
+//@Entity
 public class Users {
 
-   @Id
+//   @Id
    private Long id;
    private String username;
    private String password;

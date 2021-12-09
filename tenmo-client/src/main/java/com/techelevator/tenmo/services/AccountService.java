@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 
 public class AccountService {
 
-    private String API_BASE_URL;
+    private final String API_BASE_URL;
     private final RestTemplate restTemplate = new RestTemplate();
     private final AuthenticatedUser currentUser;
 

@@ -4,16 +4,28 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.math.BigDecimal;
 
-@Entity
+//@Entity - this is a Hibernate JPA - don't use here
 public class Transfer {
 
-    @Id
+//    @Id
     private int transferId;
     private int transferTypeId;
     private int transferStatusId;
     private int accountFrom;
     private int accountTo;
-    private BigDecimal amount;
+    private double amount;
+
+    public Transfer() {
+    }
+
+    public Transfer(int transferId, int transferTypeId, int transferStatusId, int accountFrom, int accountTo, double amount) {
+        this.transferId = transferId;
+        this.transferTypeId = transferTypeId;
+        this.transferStatusId = transferStatusId;
+        this.accountFrom = accountFrom;
+        this.accountTo = accountTo;
+        this.amount = amount;
+    }
 
     public int getTransferId() {
         return transferId;
@@ -50,10 +62,10 @@ public class Transfer {
         this.accountTo = accountTo;
     }
 
-    public BigDecimal getAmount() {
+    public double getAmount() {
         return amount;
     }
-    public void setAmount(BigDecimal amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 }

@@ -1,14 +1,14 @@
 package com.techelevator.tenmo.controller;
 
+import com.techelevator.tenmo.dao.AccountsDao;
 import com.techelevator.tenmo.dao.TransferDao;
-import com.techelevator.tenmo.dao.UsersDao;
-import com.techelevator.tenmo.model.Users;
+import com.techelevator.tenmo.model.Account;
+import com.techelevator.tenmo.model.Transfer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.math.BigDecimal;
 
 @RestController
 @PreAuthorize("isAuthenticated()")
@@ -17,17 +17,26 @@ public class TransferController {
     @Autowired
     TransferDao transferDao;
     @Autowired
-    UsersDao usersDao;
+    AccountsDao accountsDao;
 
-//    public TransferController(TransferDao transferDao, UserDao userDao) {
-//        this.transferDao = transferDao;
-//        this.userDao = userDao;
-//    }
+    @RequestMapping(path = "transfers", method = RequestMethod.POST)
+    public Transfer createTransfer(@RequestBody Transfer transfer) {
 
-    @RequestMapping(path = "users/", method = RequestMethod.GET)
-    public List<Users> getAllUsers() throws AuthenticationServiceException {
+//        Account fromAccount = new Account();
+//        Account toAccount = new Account();
+//        fromAccount.setAccountId(transfer.getAccountFrom());
+//        toAccount.setAccountId(transfer.getAccountTo());
 
-        return usersDao.findAll();
+//        double newToBalance = toAccount.getBalance() + transfer.getAmount();
+//        double newFromBalance = toAccount.getBalance() - transfer.getAmount();
+//        toAccount.setBalance(newToBalance);
+//        fromAccount.setBalance(newFromBalance);
+
+        transferDao.createTransfer(transfer);
+//        accountsDao.save(fromAccount);
+//        accountsDao.save(toAccount);
+//        return transferDao.save(transfer);
+        return transfer;
     }
 
 }

@@ -16,11 +16,11 @@ import com.techelevator.tenmo.model.UserCredentials;
 
 public class AuthenticationService {
 
-    private String baseUrl;
+    private String API_BASE_URL;
     private RestTemplate restTemplate = new RestTemplate();
 
     public AuthenticationService(String url) {
-        this.baseUrl = url;
+        this.API_BASE_URL = url;
     }
 
     public AuthenticatedUser login(UserCredentials credentials) throws AuthenticationServiceException {
@@ -42,7 +42,7 @@ public class AuthenticationService {
 
 	private AuthenticatedUser sendLoginRequest(HttpEntity<UserCredentials> entity) throws AuthenticationServiceException {
 		try {	
-			ResponseEntity<AuthenticatedUser> response = restTemplate.exchange(baseUrl + "login", HttpMethod.POST, entity, AuthenticatedUser.class);
+			ResponseEntity<AuthenticatedUser> response = restTemplate.exchange(API_BASE_URL + "login", HttpMethod.POST, entity, AuthenticatedUser.class);
 			return response.getBody(); 
 		} catch(RestClientResponseException ex) {
 			String message = createLoginExceptionMessage(ex);
@@ -52,7 +52,7 @@ public class AuthenticationService {
 
     private ResponseEntity<Map> sendRegistrationRequest(HttpEntity<UserCredentials> entity) throws AuthenticationServiceException {
     	try {
-			return restTemplate.exchange(baseUrl + "register", HttpMethod.POST, entity, Map.class);
+			return restTemplate.exchange(API_BASE_URL + "register", HttpMethod.POST, entity, Map.class);
 		} catch(RestClientResponseException ex) {
 			String message = createRegisterExceptionMessage(ex);
 			throw new AuthenticationServiceException(message);
@@ -62,10 +62,10 @@ public class AuthenticationService {
 	private String createLoginExceptionMessage(RestClientResponseException ex) {
 		String message = null;
 		if (ex.getRawStatusCode() == 401 && ex.getResponseBodyAsString().length() == 0) {
-		    message = ex.getRawStatusCode() + " : {\"timestamp\":\"" + LocalDateTime.now() + "+00:00\",\"status\":401,\"error\":\"Invalid credentials\",\"message\":\"Login failed: Invalid username or password\",\"path\":\"/login\"}";
+			message = ex.getMessage();
 		}
 		else {
-		    message = ex.getRawStatusCode() + " : " + ex.getResponseBodyAsString();
+		    message = ex.getMessage() + "\n" + ex.getResponseBodyAsString();
 		}
 		return message;
 	}
@@ -73,10 +73,10 @@ public class AuthenticationService {
 	private String createRegisterExceptionMessage(RestClientResponseException ex) {
 		String message = null;
 		if (ex.getRawStatusCode() == 400 && ex.getResponseBodyAsString().length() == 0) {
-		    message = ex.getRawStatusCode() + " : {\"timestamp\":\"" + LocalDateTime.now() + "+00:00\",\"status\":400,\"error\":\"Invalid credentials\",\"message\":\"Registration failed: Invalid username or password\",\"path\":\"/register\"}";
+			message = ex.getMessage();
 		}
 		else {
-		    message = ex.getRawStatusCode() + " : " + ex.getResponseBodyAsString();
+			message = ex.getMessage() + "\n" + ex.getResponseBodyAsString();
 		}
 		return message;
 	}

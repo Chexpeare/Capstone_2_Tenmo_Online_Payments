@@ -30,8 +30,8 @@ public class App {
 //	private static final String TRANSFER_AMOUNT = "Enter the amount you would like to transfer";
 
 	private AuthenticatedUser currentUser;
-	private final ConsoleService console;
-	private final AuthenticationService authenticationService;
+	private ConsoleService console;
+	private AuthenticationService authenticationService;
 	private AccountService accountService;
 
 	public App(ConsoleService console, AuthenticationService authenticationService) {
@@ -53,7 +53,7 @@ public class App {
 		mainMenu();
 	}
 
-	private void mainMenu() {
+	public void mainMenu() {
 		try {
 			while(true) {
 
@@ -142,27 +142,28 @@ public class App {
 			mainMenu();
 		}
 
-		BigDecimal enteredAmount = console.getUserInputAmount("Enter Transfer Amount: ");
+		double enteredAmount = console.getUserInputAmount("Enter Transfer Amount: ");
 		try {
 			Transfer newTransfer = new Transfer();
 			Transfer newTransferCheck = new Transfer();
 			newTransfer = transferService.createTransfer(currentUser.getUser().getId(), enteredUserID, enteredAmount);
-			newTransferCheck = transferService.getSingleTransfer(newTransfer.getTransfer_id());
-
-			if (!newTransferCheck.equals(null)) {
-
-				System.out.println("Transfer successfully processed.");
-			}
-
-			if (newTransferCheck.equals(null)) {
-				System.out.println("Transfer failed.");
-			}
+//			newTransferCheck = transferService.getSingleTransfer(newTransfer.getTransferId());
+//
+//			if (!newTransferCheck.equals(null)) {
+//
+//				System.out.println("Transfer successfully processed.");
+//			}
+//
+//			if (newTransferCheck.equals(null)) {
+//				System.out.println("Transfer failed.");
+//			}
 
 		} catch (NullPointerException f){
+			System.out.println(f.getMessage());
 
-			if(enteredAmount.compareTo(accountService.getAccountBalance().getBalance()) == 1) {
-				System.out.println("Not enough balance." + f.getMessage());
-			}
+//			if(enteredAmount.compareTo(accountService.getAccountBalance().getBalance()) == 1) {
+//				System.out.println("Not enough balance." + f.getMessage());
+//			}
 
 		} catch (Exception e){
 			System.out.println(e.getMessage());
