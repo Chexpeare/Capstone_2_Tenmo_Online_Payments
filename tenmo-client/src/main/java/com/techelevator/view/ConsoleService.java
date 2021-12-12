@@ -3,7 +3,6 @@ package com.techelevator.view;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.math.BigDecimal;
 import java.util.Scanner;
 
 import static java.lang.Double.parseDouble;
@@ -47,11 +46,12 @@ public class ConsoleService {
 
 	private void displayMenuOptions(Object[] options) {
 		out.print(System.lineSeparator());
+
 		for (int i = 0; i < options.length; i++) {
 			int optionNum = i + 1;
-			out.println("[" + optionNum + "] " + options[i]);
+			out.println(optionNum + ") " + options[i]);
 		}
-		out.print(System.lineSeparator() + "Please choose an option: ");
+		out.print(System.lineSeparator() + "Please choose an option >>> ");
 		out.flush();
 	}
 

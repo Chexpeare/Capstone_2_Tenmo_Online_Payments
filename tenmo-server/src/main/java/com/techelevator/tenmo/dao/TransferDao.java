@@ -1,18 +1,28 @@
 package com.techelevator.tenmo.dao;
 
 import com.techelevator.tenmo.model.Transfer;
-import com.techelevator.tenmo.model.Users;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 public interface TransferDao {
 
-    List<Transfer> listOfTransfers();
+    Transfer createTransfer(long userTo_id, long userFrom_id, BigDecimal amount);
 
-    boolean createTransfer(Transfer transfer);
+    Transfer getSingleTransfer(long transfer_id);
 
-//    Transfer createTransfer(long from_user_id, long to_user_id, BigDecimal amount);
+    List <Transfer> getAllTransfers(long user_id);
+
+    boolean runTransaction(Transfer transfer);
+
+    void addToBalance(long user_id,BigDecimal amount);
+
+    void subtractFromBalance(long user_id,BigDecimal amount);
+
+    BigDecimal getAccountBalance(long user_id);
+
+    void deleteTransfer(Long transferID);
+
+    void requestMoney(int userTo_id, int userFrom_id, BigDecimal amount);
 
 }

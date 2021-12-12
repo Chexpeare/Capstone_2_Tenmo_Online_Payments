@@ -1,0 +1,10 @@
+SELECT account_id, users.user_id, balance 
+FROM accounts 
+JOIN users ON users.user_id = accounts.user_id;
+--WHERE users.user_id = 1001;
+
+SELECT * FROM users;
+SELECT * FROM accounts;
+SELECT * FROM transfers;
+SELECT * FROM transfer_types;
+SELECT * FROM transfer_statuses;

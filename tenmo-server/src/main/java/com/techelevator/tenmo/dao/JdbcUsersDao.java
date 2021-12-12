@@ -23,19 +23,6 @@ public class JdbcUsersDao implements UsersDao {
     }
 
     @Override
-    public List<Users> findAll() {
-        List<Users> users = new ArrayList<>();
-        String sql = "SELECT user_id, username, password_hash FROM users;";
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
-        while(results.next()) {
-            Users user = mapRowToUser(results);
-            users.add(user);
-            System.out.println(user);
-        }
-        return users;
-    }
-
-    @Override
     public int findIdByUsername(String username) {
         String sql = "SELECT user_id FROM users WHERE username ILIKE ?;";
         Integer id = jdbcTemplate.queryForObject(sql, Integer.class, username);
@@ -44,6 +31,18 @@ public class JdbcUsersDao implements UsersDao {
         } else {
             return -1;
         }
+    }
+
+    @Override
+    public List<Users> findAll() {
+        List<Users> users = new ArrayList<>();
+        String sql = "SELECT user_id, username, password_hash FROM users;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        while(results.next()) {
+            Users user = mapRowToUser(results);
+            users.add(user);
+        }
+        return users;
     }
 
     @Override
@@ -80,11 +79,11 @@ public class JdbcUsersDao implements UsersDao {
         return true;
     }
 
-    private Users mapRowToUser(SqlRowSet results) {
+    private Users mapRowToUser(SqlRowSet rs) {
         Users users = new Users();
-        users.setId(results.getLong("user_id"));
-        users.setUsername(results.getString("username"));
-        users.setPassword(results.getString("password_hash"));
+        users.setId(rs.getLong("user_id"));
+        users.setUsername(rs.getString("username"));
+        users.setPassword(rs.getString("password_hash"));
         users.setActivated(true);
         users.setAuthorities("USER");
         return users;

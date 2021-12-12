@@ -1,36 +1,43 @@
 package com.techelevator.tenmo.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import java.math.BigDecimal;
 
-//@Entity - this is a Hibernate JPA - don't use here
 public class Transfer {
 
-//    @Id
-    private int transferId;
+    private long transferId;
     private int transferTypeId;
     private int transferStatusId;
-    private int accountFrom;
-    private int accountTo;
-    private double amount;
+    private long accountFrom;
+    private long accountTo;
+    private BigDecimal amount;
+    private long user_id_From;
+    private long user_id_To;
+    private String transferType;
+    private String transferStatus;
+    private String usernameFrom;
+    private String usernameTo;
 
-    public Transfer() {
-    }
+    public Transfer() {}
 
-    public Transfer(int transferId, int transferTypeId, int transferStatusId, int accountFrom, int accountTo, double amount) {
+    public Transfer(long transferId, int transferTypeId, int transferStatusId, long accountFrom, long accountTo, BigDecimal amount, long user_id_From, long user_id_To, String transferType, String transferStatus, String usernameFrom, String usernameTo) {
         this.transferId = transferId;
         this.transferTypeId = transferTypeId;
         this.transferStatusId = transferStatusId;
         this.accountFrom = accountFrom;
         this.accountTo = accountTo;
         this.amount = amount;
+        this.user_id_From = user_id_From;
+        this.user_id_To = user_id_To;
+        this.transferType = transferType;
+        this.transferStatus = transferStatus;
+        this.usernameFrom = usernameFrom;
+        this.usernameTo = usernameTo;
     }
 
-    public int getTransferId() {
+    public long getTransferId() {
         return transferId;
     }
-    public void setTransferId(int transferId) {
+    public void setTransferId(long transferId) {
         this.transferId = transferId;
     }
 
@@ -48,24 +55,84 @@ public class Transfer {
         this.transferStatusId = transferStatusId;
     }
 
-    public int getAccountFrom() {
+    public long getAccountFrom() {
         return accountFrom;
     }
-    public void setAccountFrom(int accountFrom) {
+    public void setAccountFrom(long accountFrom) {
         this.accountFrom = accountFrom;
     }
 
-    public int getAccountTo() {
+    public long getAccountTo() {
         return accountTo;
     }
-    public void setAccountTo(int accountTo) {
+    public void setAccountTo(long accountTo) {
         this.accountTo = accountTo;
     }
 
-    public double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
-    public void setAmount(double amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    public long getUser_id_From() {
+        return user_id_From;
+    }
+    public void setUser_id_From(long user_id_From) {
+        this.user_id_From = user_id_From;
+    }
+
+    public long getUser_id_To() {
+        return user_id_To;
+    }
+    public void setUser_id_To(long user_id_To) {
+        this.user_id_To = user_id_To;
+    }
+
+    public String getTransferType() {
+        return transferType;
+    }
+    public void setTransferType(String transferType) {
+        this.transferType = transferType;
+    }
+
+    public String getTransferStatus() {
+        return transferStatus;
+    }
+    public void setTransferStatus(String transferStatus) {
+        this.transferStatus = transferStatus;
+    }
+
+    public String getUsernameFrom() {
+        return usernameFrom;
+    }
+    public void setUsernameFrom(String usernameFrom) {
+        this.usernameFrom = usernameFrom;
+    }
+
+    public String getUsernameTo() {
+        return usernameTo;
+    }
+    public void setUsernameTo(String usernameTo) {
+        this.usernameTo = usernameTo;
+    }
+
+    @Override
+    public String toString() {
+        return "Transfer{" +
+                "transfer_id=" + transferId +
+                ", transfer_type_id=" + transferTypeId +
+                ", transfer_status_id=" + transferStatusId +
+                ", account_from=" + accountFrom +
+                ", account_to=" + accountTo +
+                ", amount=" + amount +
+                ", user_id_From=" + user_id_From +
+                ", user_id_To=" + user_id_To +
+                ", transfer_type='" + transferType + '\'' +
+                ", transfer_status='" + transferStatus + '\'' +
+                ", username_from='" + usernameFrom + '\'' +
+                ", username_to='" + usernameTo + '\'' +
+                '}';
     }
 }

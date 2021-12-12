@@ -1,42 +1,43 @@
 package com.techelevator.tenmo.controller;
 
-import com.techelevator.tenmo.dao.AccountsDao;
 import com.techelevator.tenmo.dao.TransferDao;
-import com.techelevator.tenmo.model.Account;
 import com.techelevator.tenmo.model.Transfer;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
+import java.util.List;
 
 @RestController
 @PreAuthorize("isAuthenticated()")
+
 public class TransferController {
 
-    @Autowired
-    TransferDao transferDao;
-    @Autowired
-    AccountsDao accountsDao;
+    private TransferDao transferDao;
+
+    public TransferController (TransferDao transferDao) {
+        this.transferDao = transferDao;
+    }
 
     @RequestMapping(path = "transfers", method = RequestMethod.POST)
     public Transfer createTransfer(@RequestBody Transfer transfer) {
 
-//        Account fromAccount = new Account();
-//        Account toAccount = new Account();
-//        fromAccount.setAccountId(transfer.getAccountFrom());
-//        toAccount.setAccountId(transfer.getAccountTo());
+        Transfer createdTransfer = transferDao.createTransfer(transfer.getUser_id_From(),transfer.getUser_id_To(),transfer.getAmount());
 
-//        double newToBalance = toAccount.getBalance() + transfer.getAmount();
-//        double newFromBalance = toAccount.getBalance() - transfer.getAmount();
-//        toAccount.setBalance(newToBalance);
-//        fromAccount.setBalance(newFromBalance);
+        return createdTransfer;
+    }
 
-        transferDao.createTransfer(transfer);
-//        accountsDao.save(fromAccount);
-//        accountsDao.save(toAccount);
-//        return transferDao.save(transfer);
-        return transfer;
+    @RequestMapping(path = "transfers/{transferID}", method = RequestMethod.GET)//make a transfer not found exception
+    public Transfer getSingleTransfer(@PathVariable long transferID){
+
+        Transfer singleTransfer = transferDao.getSingleTransfer(transferID);
+        return singleTransfer;
+    }
+    @RequestMapping(path = "transfers/{userID}/all", method = RequestMethod.GET)
+    public List<Transfer> getAllTransfers(@PathVariable long userID) {
+
+        List<Transfer> listAllTransfers = transferDao.getAllTransfers(userID);
+
+        return listAllTransfers;
     }
 
 }

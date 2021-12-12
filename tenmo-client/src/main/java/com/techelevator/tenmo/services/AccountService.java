@@ -13,9 +13,9 @@ import java.math.BigDecimal;
 
 public class AccountService {
 
-    private final String API_BASE_URL;
-    private final RestTemplate restTemplate = new RestTemplate();
-    private final AuthenticatedUser currentUser;
+    private String API_BASE_URL;
+    private RestTemplate restTemplate = new RestTemplate();
+    private AuthenticatedUser currentUser;
 
     public AccountService(String API_BASE_URL, AuthenticatedUser currentUser) {
         this.API_BASE_URL = API_BASE_URL;
@@ -27,26 +27,50 @@ public class AccountService {
 
         try {
             ResponseEntity<Account> response =
-                    restTemplate.exchange(API_BASE_URL + "accounts/" + accountId,
+                    restTemplate.exchange(API_BASE_URL + "account/" + accountId,
                             HttpMethod.GET, makeAuthEntity(), Account.class);
             currentAccount = response.getBody();
+
         } catch (RestClientResponseException | ResourceAccessException e) {
             System.out.println("Error finding transfer.");
+            ;
         }
         return currentAccount;
+
     }
 
-    public Account getAccountBalance() {
-        Account accountBalance = null;
+    public BigDecimal getAccountBalance() {
+        BigDecimal accountBalance = new BigDecimal(0);
         try {
-            ResponseEntity<Account> responseBalance = restTemplate.exchange(API_BASE_URL + "accounts/" + currentUser.getUser().getId(),
-                            HttpMethod.GET, makeAuthEntity(), Account.class);
-            accountBalance = responseBalance.getBody();
-
+            accountBalance = restTemplate.exchange(API_BASE_URL + "balance/" + currentUser.getUser().getId(), HttpMethod.GET, makeAuthEntity(), BigDecimal.class).getBody();
         } catch (RestClientException e) {
-            System.out.println("Error getting balance " + e.getMessage());
+            System.out.println("Error getting balance");
         }
         return accountBalance;
+    }
+
+    public User[] findAllUsers(){
+
+        User[] users = null;
+        try {
+            users = restTemplate.exchange(API_BASE_URL + "transfer/users", HttpMethod.GET, makeAuthEntity(), User[].class).getBody();
+
+            for (int i = 0; i < users.length; i++) {
+                System.out.println("     " + users[i]);
+            }
+
+        } catch (RestClientResponseException e) {
+            System.out.println("Error getting users");
+        }
+        return users;
+
+    }
+
+    private HttpEntity<Account> makeAccountEntity(Account account) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(currentUser.getToken());
+        return new HttpEntity<>(account, headers);
     }
 
     private HttpEntity<Void> makeAuthEntity() {

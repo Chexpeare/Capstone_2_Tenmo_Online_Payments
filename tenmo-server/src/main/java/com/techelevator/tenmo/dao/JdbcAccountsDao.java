@@ -5,40 +5,59 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
-import javax.sql.DataSource;
+import java.math.BigDecimal;
 
 @Component
 public class JdbcAccountsDao implements AccountsDao {
 
-    private final JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
 
-    public JdbcAccountsDao(DataSource dataSource) {
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
+    public JdbcAccountsDao(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     @Override
-    public Account getBalance(int id) {
+    public Account getAccount(long user_id){
 
-        String sql = "SELECT account_id, users.user_id, balance " +
-                "FROM accounts " +
-                "JOIN users ON users.user_id = accounts.user_id " +
-                "WHERE users.user_id = ?;";
-
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
         Account account = null;
-        while(results.next()) {
+
+        String sql = "SELECT account_id, user_id, balance " +
+                "FROM accounts " +
+                "WHERE user_id = ?;";
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, user_id);
+        if (results.next()) {
             account = mapRowToAccount(results);
-            System.out.println(account);
         }
         return account;
     }
 
-    private Account mapRowToAccount(SqlRowSet results) {
-        Account acctData = new Account();
-        acctData.setAccountId(results.getLong("account_id"));
-        acctData.setUserId(results.getLong("user_id"));
-        acctData.setBalance(results.getDouble("balance"));
-        return acctData;
+    @Override
+    public void addToAccountBalance(BigDecimal amount, long user_id){
+
+        String sql = "UPDATE accounts " +
+                "SET balance = balance + ? " +
+                "WHERE user_id = ?;";
+        jdbcTemplate.update(sql, amount, user_id);
+    }
+
+    @Override
+    public void subtractFromAccountBalance(BigDecimal amount,long user_id){
+
+        String sql = "UPDATE accounts " +
+                "SET balance = balance - ? " +
+                "WHERE user_id = ?;";
+        jdbcTemplate.update(sql, amount, user_id);
+    };
+
+    private Account mapRowToAccount(SqlRowSet rowSet) {
+        Account account = new Account();
+
+        account.setAccountId(rowSet.getLong("account_id"));
+        account.setUserId(rowSet.getLong("user_id"));
+        account.setBalance(rowSet.getBigDecimal("balance"));
+
+        return account;
     }
 
 }

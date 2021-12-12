@@ -4,32 +4,48 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="59564bab-6689-417a-bdf5-d99c84f698e3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_jpa_2_6_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_orm_5_2_6_RELEASE.xml" afterDir="false" />
+    <list default="true" id="59564bab-6689-417a-bdf5-d99c84f698e3" name="Changes" comment="Merge branch 'main' of https://merit-america.git.techelevator.com/cguevara/capstone">
+      <change afterPath="$PROJECT_DIR$/database/capstoneSQL" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/App.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/model/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/model/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/model/AuthenticatedUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/model/AuthenticatedUser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/model/Transfer.java" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/model/Transfer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/model/TransferStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/model/TransferStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/model/TransferType.java" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/model/TransferType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/model/UserCredentials.java" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/model/UserCredentials.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/services/AccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/services/AccountService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/services/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/services/AuthenticationService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/services/TransferService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/services/TransferService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/services/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/view/ConsoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/view/ConsoleService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tenmo-client/target/classes/com/techelevator/tenmo/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-client/target/classes/com/techelevator/tenmo/App.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tenmo-client/target/classes/com/techelevator/tenmo/model/Account.class" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-client/target/classes/com/techelevator/tenmo/model/Account.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tenmo-client/target/classes/com/techelevator/tenmo/model/Transfer.class" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-client/target/classes/com/techelevator/tenmo/model/Transfer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tenmo-client/target/classes/com/techelevator/tenmo/model/TransferStatus.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tenmo-client/target/classes/com/techelevator/tenmo/model/TransferType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tenmo-client/target/classes/com/techelevator/tenmo/model/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-client/target/classes/com/techelevator/tenmo/model/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tenmo-client/target/classes/com/techelevator/tenmo/model/UserCredentials.class" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-client/target/classes/com/techelevator/tenmo/model/UserCredentials.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tenmo-client/target/classes/com/techelevator/tenmo/services/AccountService.class" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-client/target/classes/com/techelevator/tenmo/services/AccountService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tenmo-client/target/classes/com/techelevator/tenmo/services/AuthenticationService.class" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-client/target/classes/com/techelevator/tenmo/services/AuthenticationService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tenmo-client/target/classes/com/techelevator/tenmo/services/TransferService.class" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-client/target/classes/com/techelevator/tenmo/services/TransferService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tenmo-client/target/classes/com/techelevator/tenmo/services/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-client/target/classes/com/techelevator/tenmo/services/UserService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tenmo-client/target/classes/com/techelevator/view/ConsoleService.class" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-client/target/classes/com/techelevator/view/ConsoleService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tenmo-server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-server/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tenmo-server/src/main/java/com/techelevator/tenmo/controller/AccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-server/src/main/java/com/techelevator/tenmo/controller/AccountController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tenmo-server/src/main/java/com/techelevator/tenmo/controller/TransferController.java" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-server/src/main/java/com/techelevator/tenmo/controller/TransferController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tenmo-server/src/main/java/com/techelevator/tenmo/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-server/src/main/java/com/techelevator/tenmo/controller/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tenmo-server/src/main/java/com/techelevator/tenmo/dao/AccountsDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-server/src/main/java/com/techelevator/tenmo/dao/AccountsDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tenmo-server/src/main/java/com/techelevator/tenmo/dao/JdbcAccountsDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-server/src/main/java/com/techelevator/tenmo/dao/JdbcAccountsDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tenmo-server/src/main/java/com/techelevator/tenmo/dao/JdbcTransferDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-server/src/main/java/com/techelevator/tenmo/dao/JdbcTransferDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tenmo-server/src/main/java/com/techelevator/tenmo/dao/JdbcUsersDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-server/src/main/java/com/techelevator/tenmo/dao/JdbcUsersDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tenmo-server/src/main/java/com/techelevator/tenmo/dao/TransferDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-server/src/main/java/com/techelevator/tenmo/dao/TransferDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tenmo-server/src/main/java/com/techelevator/tenmo/dao/UsersDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-server/src/main/java/com/techelevator/tenmo/dao/UsersDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tenmo-server/src/main/java/com/techelevator/tenmo/model/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-server/src/main/java/com/techelevator/tenmo/model/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tenmo-server/src/main/java/com/techelevator/tenmo/model/Authority.java" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-server/src/main/java/com/techelevator/tenmo/model/Authority.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tenmo-server/src/main/java/com/techelevator/tenmo/model/Transfer.java" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-server/src/main/java/com/techelevator/tenmo/model/Transfer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tenmo-server/src/main/java/com/techelevator/tenmo/model/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-server/src/main/java/com/techelevator/tenmo/model/Users.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tenmo-server/src/main/java/com/techelevator/tenmo/security/UserModelDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tenmo-server/src/main/java/com/techelevator/tenmo/security/UserModelDetailsService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,6 +93,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -98,19 +115,6 @@
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.techelevator.tenmo.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="DemoApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.demo.DemoApplication" />
-      <module name="demo" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.demo.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -146,12 +150,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.App" />
+      <item itemvalue="Application.TenmoApplication" />
+      <item itemvalue="JUnit.ConsoleServiceTest" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.App" />
         <item itemvalue="Application.TenmoApplication" />
         <item itemvalue="JUnit.ConsoleServiceTest" />
-        <item itemvalue="Application.DemoApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -200,6 +208,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Rolling back to original file: JdbcUserDao.java" />
     <MESSAGE value="Rolling back to original file: AuthenticationController.java" />
     <MESSAGE value="Merge branch 'main' of https://merit-america.git.techelevator.com/cguevara/capstone" />
@@ -209,11 +218,21 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/services/AccountService.java</url>
-          <line>39</line>
-          <option name="timeStamp" value="35" />
+          <url>file://$PROJECT_DIR$/tenmo-client/src/main/java/com/techelevator/tenmo/App.java</url>
+          <line>59</line>
+          <option name="timeStamp" value="64" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="com.techelevator.tenmo.model.User" memberName="userId" />
+      </pinned-members>
+    </pin-to-top-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/capstone$App.ic" NAME="App Coverage Results" MODIFIED="1639174101644" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.techelevator.tenmo.*</FILTER>
+    </SUITE>
   </component>
 </project>

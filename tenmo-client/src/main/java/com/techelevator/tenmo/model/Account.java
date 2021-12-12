@@ -8,13 +8,10 @@ public class Account {
     private long userId;
     private BigDecimal balance;
 
-//    public Account(double val) {
-//        super(val);
-//    }
-
     public long getAccountId() {
         return accountId;
     }
+
     public void setAccountId(long accountId) {
         this.accountId = accountId;
     }
@@ -22,6 +19,7 @@ public class Account {
     public long getUserId() {
         return userId;
     }
+
     public void setUserId(long userId) {
         this.userId = userId;
     }
@@ -29,8 +27,10 @@ public class Account {
     public BigDecimal getBalance() {
         return balance;
     }
+
     public void setBalance(BigDecimal balance) {
         this.balance = balance;
+
     }
 
     @Override

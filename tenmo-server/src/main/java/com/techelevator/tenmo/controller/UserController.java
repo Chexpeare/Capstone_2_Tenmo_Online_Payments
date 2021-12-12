@@ -2,7 +2,6 @@ package com.techelevator.tenmo.controller;
 
 import com.techelevator.tenmo.dao.UsersDao;
 import com.techelevator.tenmo.model.Users;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,16 +11,24 @@ import java.util.List;
 
 @RestController
 @PreAuthorize("isAuthenticated()")
+
 public class UserController {
 
-    @Autowired
-    UsersDao usersDao;
+    private UsersDao usersDao;
 
-    @PreAuthorize("hasRole('ROLE_USER')")
-    @RequestMapping(path="users", method = RequestMethod.GET)
-    public List<Users> allUsers() {
-        System.out.println();
-        return usersDao.findAll();
+    public UserController(UsersDao usersDao) {
+        this.usersDao = usersDao;
     }
+
+
+    @RequestMapping(path = "transfer/users", method = RequestMethod.GET) //this method was not working for some reason
+    public List<Users> findAll(){
+
+        List<Users> listAllUsers = usersDao.findAll();
+
+        return listAllUsers;
+
+    }
+
 
 }

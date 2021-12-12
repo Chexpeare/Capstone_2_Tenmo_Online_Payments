@@ -1,10 +1,14 @@
 package com.techelevator.tenmo.dao;
 
 import com.techelevator.tenmo.model.Account;
-import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.math.BigDecimal;
 
 public interface AccountsDao {
 
-    public Account getBalance(int id);
+    Account getAccount(long user_id);
 
+    void addToAccountBalance(BigDecimal amount, long user_id);
+
+    void subtractFromAccountBalance(BigDecimal amount,long user_id);
 }

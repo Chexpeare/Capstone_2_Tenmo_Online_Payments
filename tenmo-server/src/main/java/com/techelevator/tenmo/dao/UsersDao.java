@@ -8,10 +8,9 @@ public interface UsersDao {
 
     List<Users> findAll();
 
-    int findIdByUsername(String username);
-
     Users findByUsername(String username);
 
-    boolean create(String username, String password);
+    int findIdByUsername(String username);
 
+    boolean create(String username, String password);
 }
