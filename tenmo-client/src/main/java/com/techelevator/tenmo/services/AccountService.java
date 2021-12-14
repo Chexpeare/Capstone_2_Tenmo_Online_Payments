@@ -60,7 +60,7 @@ public class AccountService {
             }
 
         } catch (RestClientResponseException e) {
-            System.out.println("Error getting users");
+            System.out.println("Error getting users: " + e.getMessage());
         }
         return users;
 

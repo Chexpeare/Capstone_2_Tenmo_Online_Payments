@@ -87,10 +87,7 @@ public class App {
 	}
 
 	private void sendBucks() {
-		System.out.println("--------------------------------------------");
-		System.out.println("           List of Eligible Users   		");
-		System.out.println("              ID          Name              ");
-		System.out.println("--------------------------------------------");
+		printSendBucks();
 
 		TransferService transferService = new TransferService(API_BASE_URL, currentUser);
 		AccountService accountService = new AccountService(API_BASE_URL, currentUser);
@@ -113,22 +110,26 @@ public class App {
 		BigDecimal enteredAmount = BigDecimal.valueOf(console.getUserInputAmount("Enter amount: "));
 
 		try {
-			newTransfer = transferService.createTransfer(currentUser.getUser().getId(), enteredUserID, enteredAmount);
+			newTransfer = transferService.createTransfer(currentUser.getUser().getId(), enteredUserID, enteredAmount, 2,2);
 			newTransferCheck = transferService.getSingleTransfer(newTransfer.getTransferId());
 
 			if (!newTransferCheck.equals(null)) {
-				System.out.println("Transfer successfully processed");
+				System.out.println("--------------------------------");
+				System.out.println("Transfer successfully processed.");
+				System.out.println("--------------------------------");
 			}
 			if (newTransferCheck.equals(null)) {
-				System.out.println("Transfer failed.");
+				System.out.println("----------------------------------");
+				System.out.println("You cannot send money to yourself.\nPlease try again.");
+				System.out.println("----------------------------------");
 			}
 		} catch(NullPointerException f){
 
 			if(enteredAmount.compareTo(accountService.getAccountBalance()) == 1) {
 				System.out.println();
-				System.out.println("----------------------------------------------------");
-				System.out.println("What? Are you serious? This account is out of money!\nTry again.");
-				System.out.println("----------------------------------------------------");
+				System.out.println("----------------------------------------------");
+				System.out.println("There are not enough TE bucks in this account.\nPlease try again.");
+				System.out.println("----------------------------------------------");
 			}
 		}catch(Exception e){
 			System.out.println();
@@ -165,8 +166,54 @@ public class App {
 	}
 
 	private void requestBucks() {
-//	TODO Auto-generated method stub
-//	Use sendBucks() as a general template
+//	TODO: !! requestBucks() implementation: In Progress !!
+		printRequestBucks();
+
+		TransferService transferService = new TransferService(API_BASE_URL, currentUser);
+		AccountService accountService = new AccountService(API_BASE_URL, currentUser);
+
+		try {
+			accountService.findAllUsers();
+		} catch (NullPointerException e) {
+			System.out.println("Account empty.");
+		}
+		Transfer newTransfer = new Transfer();
+		Transfer newTransferCheck = new Transfer();
+
+		Integer enteredUserID = console.getUserInputInteger("--------------------------------------------" +
+				"\nEnter ID of user you are requesting funds from (0 to cancel): ");
+		if (enteredUserID == 0) {
+			mainMenu();
+		}
+
+		BigDecimal enteredAmount = BigDecimal.valueOf(console.getUserInputAmount("Enter amount: "));
+
+		try {
+			newTransfer = transferService.createTransfer(enteredUserID, currentUser.getUser().getId(), enteredAmount, 1,1);
+			newTransferCheck = transferService.getSingleTransfer(newTransfer.getTransferId());
+
+			if (!newTransferCheck.equals(null)) {
+				System.out.println("--------------------------------");
+				System.out.println("Transfer successfully processed.");
+				System.out.println("--------------------------------");
+			}
+			if (newTransferCheck.equals(null)) {
+				System.out.println("--------------------------------");
+				System.out.println("        Transfer failed.        ");
+				System.out.println("--------------------------------");
+			}
+		} catch(NullPointerException f){
+
+			if(enteredAmount.compareTo(accountService.getAccountBalance()) == 1) {
+				System.out.println();
+				System.out.println("----------------------------------------------------");
+				System.out.println("The source account is out of money!\nTry again.");
+				System.out.println("----------------------------------------------------");
+			}
+		}catch(Exception e){
+			System.out.println();
+		}
+
 	}
 
 	private void viewPendingRequests() {
@@ -195,7 +242,6 @@ public class App {
 	private boolean isAuthenticated() {
 		return currentUser != null;
 	}
-
 	private void register() {
 		System.out.println("----------------------------------");
 		System.out.println("Please register a new user account");
@@ -213,14 +259,13 @@ public class App {
 			} catch(AuthenticationServiceException e) {
 				System.out.println("REGISTRATION ERROR: "+e.getMessage());
 				System.out.println("-------------------------------------------");
-				System.out.println("Please attempt to register again.");
+				System.out.println("Please attempt to register again.          ");
 				System.out.println("-------------------------------------------");
 			}
 		}
 	}
-
 	private void login() {
-		System.out.println("Please log in.");
+		System.out.println("<<< Please log in >>>");
 		currentUser = null;
 		while (currentUser == null) 	//will keep looping until user is logged in
 		{
@@ -229,16 +274,29 @@ public class App {
 				currentUser = authenticationService.login(credentials);
 			} catch (AuthenticationServiceException e) {
 				System.out.println("LOGIN ERROR: "+e.getMessage());
-				System.out.println("------------------------------");
-				System.out.println("Please attempt to login again.");
-				System.out.println("------------------------------");
+				System.out.println("-------------------------------------------");
+				System.out.println("Please attempt to login again.             ");
+				System.out.println("-------------------------------------------");
 			}
 		}
 	}
-
 	private UserCredentials collectUserCredentials() {
 		String username = console.getUserInput("Username: ");
 		String password = console.getUserInput("Password: ");
 		return new UserCredentials(username, password);
 	}
+
+	private void printSendBucks() {
+		System.out.println("--------------------------------------------");
+		System.out.println("       Send TE Bucks | List of Users   		");
+		System.out.println("              ID          Name              ");
+		System.out.println("--------------------------------------------");
+	}
+	private void printRequestBucks() {
+		System.out.println("--------------------------------------------");
+		System.out.println("      Request TE Bucks | List of Users      ");
+		System.out.println("              ID          Name              ");
+		System.out.println("--------------------------------------------");
+	}
+
 }

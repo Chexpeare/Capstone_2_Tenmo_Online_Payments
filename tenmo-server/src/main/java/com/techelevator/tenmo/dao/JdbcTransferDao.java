@@ -94,18 +94,19 @@ public class JdbcTransferDao implements TransferDao {
     }
 
     @Override
-    public Transfer createTransfer( long from_user_id,long to_user_id, BigDecimal amount){
+    public Transfer createTransfer(long from_user_id, long to_user_id, BigDecimal amount, int transferTypeId, int transferStatusId){
 
         String sql = "INSERT INTO transfers (transfer_type_id, transfer_status_id, account_from, account_to, amount)\n" +
-                "VALUES (2, 2, (SELECT account_id from accounts WHERE user_id = ?) , (SELECT account_id from accounts WHERE user_id = ?), ?) RETURNING transfer_id;";
+                "VALUES (?, ?, (SELECT account_id from accounts WHERE user_id = ?) , (SELECT account_id from accounts WHERE user_id = ?), ?) RETURNING transfer_id;";
 
         long newTransferId = -1;
 
         try {
-            newTransferId = jdbcTemplate.queryForObject(sql, Long.class, from_user_id, to_user_id, amount);
+            newTransferId = jdbcTemplate.queryForObject(sql, Long.class, transferTypeId, transferStatusId, from_user_id, to_user_id, amount);
 
             System.out.println(newTransferId);
-        }catch (DataAccessException e) {
+
+        } catch (DataAccessException e) {
             System.out.println("Transfer creation failed");
         }
 

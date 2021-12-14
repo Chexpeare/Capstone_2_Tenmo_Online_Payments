@@ -21,7 +21,8 @@ public class TransferController {
     @RequestMapping(path = "transfers", method = RequestMethod.POST)
     public Transfer createTransfer(@RequestBody Transfer transfer) {
 
-        Transfer createdTransfer = transferDao.createTransfer(transfer.getUser_id_From(),transfer.getUser_id_To(),transfer.getAmount());
+        Transfer createdTransfer = transferDao.createTransfer(transfer.getUser_id_From(),transfer.getUser_id_To(),transfer.getAmount(),
+                                                                transfer.getTransferTypeId(), transfer.getTransferStatusId());
 
         return createdTransfer;
     }

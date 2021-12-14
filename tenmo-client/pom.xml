@@ -10,7 +10,7 @@
         <java.version>11</java.version>
 
         <!-- spring properties -->
-        <spring.version>5.2.6.RELEASE</spring.version>
+        <spring.version>5.3.13</spring.version>
 
         <!-- plugin properties -->
         <maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>
@@ -38,17 +38,16 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
-            <version>2.10.3</version>
+            <version>2.13.0</version>
         </dependency>
 
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.10.3</version>
+            <version>2.13.0</version>
         </dependency>
 
         <!-- Test -->
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
@@ -79,34 +78,55 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>3.141.59</version>
+            <version>4.1.0</version>
         </dependency>
 
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-chrome-driver</artifactId>
-            <version>3.141.59</version>
+            <version>4.1.0</version>
         </dependency>
 
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
-            <version>5.6.0</version>
+            <version>7.1.0</version>
         </dependency>
 
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>4.13.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>5.4.15.Final</version>
+            <version>5.6.1.Final</version>
+        </dependency>
+
+<!--         https://stackoverflow.com/questions/7421612/slf4j-failed-to-load-class-org-slf4j-impl-staticloggerbinder-->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.32</version>
+        </dependency>
+<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
+<!--        <dependency>-->
+<!--            <groupId>org.slf4j</groupId>-->
+<!--            <artifactId>slf4j-simple</artifactId>-->
+<!--            <version>1.7.32</version>-->
+<!--        </dependency>-->
+
+<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-nop -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-nop</artifactId>
+            <version>1.7.32</version>
         </dependency>
 
     </dependencies>
+
     <build>
         <plugins>
             <plugin>

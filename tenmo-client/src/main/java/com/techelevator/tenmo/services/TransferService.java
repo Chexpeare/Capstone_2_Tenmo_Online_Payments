@@ -75,13 +75,15 @@ public class TransferService {
 
     }
 
-    public Transfer createTransfer(long userIdFrom, long userIdTo, BigDecimal amount) {
+    public Transfer createTransfer(long userIdFrom, long userIdTo, BigDecimal amount, int transferTypeId, int transferStatusId) {
 
         Transfer newTransfer = new Transfer();
 
         newTransfer.setUser_id_From(userIdFrom);
         newTransfer.setUser_id_To(userIdTo);
         newTransfer.setAmount(amount);
+        newTransfer.setTransferTypeId(transferTypeId);
+        newTransfer.setTransferStatusId(transferStatusId);
 
         try {
 
@@ -133,4 +135,5 @@ public class TransferService {
 
 
     }
+
 }
