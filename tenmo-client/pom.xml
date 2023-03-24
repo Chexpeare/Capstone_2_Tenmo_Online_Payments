@@ -10,7 +10,7 @@
         <java.version>11</java.version>
 
         <!-- spring properties -->
-        <spring.version>5.3.13</spring.version>
+        <spring.version>5.3.26</spring.version>
 
         <!-- plugin properties -->
         <maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>
